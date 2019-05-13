@@ -8,13 +8,13 @@
          <title>      {% block title %} {% endblock %} </title>
          <!-- Required meta tags -->
 
-          <meta charset="utf-8">
-          <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+         <meta charset="utf-8">
+         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
          <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
          <link rel="stylesheet" href="static/css/text.css" type="text/css">
          <link rel="stylesheet" href="static/css/poker.css" type="text/css">
          <script charset="UTF-8" src=static/js/players.js></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
          <script charset="UTF-8" src=static/js/rules.js></script>
          <script charset="UTF-8" src=static/js/bot.js></script>
          <script charset="UTF-8" src=static/js/gui.js></script>
@@ -25,19 +25,16 @@
          {% endblock %}
   </head>
   <body>
-
         <div class="container bg-white rounded">
           <div class="container">
             <nav class="navbar fixed-top navbar-dark bg-dark flex-row">
               <!-- The navbar present at the top of our demo page -->
-                <a class="navbar-brand text-info" href="/"><b>New York Hold'em</b></a>
+                <a class="navbar-brand text-info" href="/"><b> Brick Breaking out of High School </b></a>
                 {% block login %}
                 {% endblock %}
             </nav>
           </div>
         <br><br><br>
-
-
         <div class="row" style="padding-left: 90px; padding-right: 90px">
           <div class="col-md-12">
             {% if alerts != [] and alerts != None %}
@@ -49,10 +46,8 @@
             {% endif %}
           </div>
         </div>
-
         {% block content %}
-
         {% endblock %}
-      <footer class="-footer bg-dark fixed-bottom text-warning text-right" style="padding-bottom: 10px; padding-top: 5px; padding-right: 30px; margin-top:100px;">&copy;dah_its_rewind_time 2018 &mdash; Robin Han, Bill Ni, Simon Tsui, Vincent Chi</footer>
+      <footer class="-footer bg-dark fixed-bottom text-warning text-right" style="padding-bottom: 10px; padding-top: 5px; padding-right: 30px; margin-top:100px;">&copy;VIAQom &mdash; Ahnaf Kazi, Isaac Jon, Qian Zhou, Vincent Chi</footer>
 </body>
 </html>
