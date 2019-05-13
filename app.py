@@ -10,7 +10,7 @@ ssl._create_default_https_context = ssl._create_unverified_context
 
 from flask import Flask, redirect, url_for, render_template, session, request, flash, get_flashed_messages
 
-from utils import database, api
+from utils import database
 
 
 # instantiate Flask object

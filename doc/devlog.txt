@@ -21,6 +21,7 @@ vincentC -- 14:25 2019-05-08
 Devlog has been beautified.
 Initial groundwork is laid out.
 ==============================================================
+
 all -- 21:00 2019-05-12
 --------------------------------------------------------------
 change design.pdf to reflect criticism, namely:
@@ -28,6 +29,12 @@ change design.pdf to reflect criticism, namely:
        added details regarding potential upgrades and what levels may correspond to
        added a component list
 ==============================================================
+
+isaacJ -- 13:16 2019-05-13
+--------------------------------------------------------------
+Added database functions for registering users 
+==============================================================
+
 (Work off this template!) topherM -- 1999-12-31 23:59
 --------------------------------------------------------------
 

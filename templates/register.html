@@ -1,0 +1,45 @@
+<!-- VIAQom - Ahnaf Kazi, Isaac Jon, Qian Zhou, Vincent Chi  -->
+<!-- Register an account. -->
+
+<!DOCTYPE html>
+{% extends "layer2.html" %}
+{% block title %} Brick Breaking out of High School {% endblock %}
+
+{% block content %}
+  <div class="container">
+  		<br>
+		<a class="text-dark" style="text-decoration: none;"><h1 class="text-center"> Brick Breaking out of High School </h1></a>
+  </div>
+  <div class = "container" style="position: absolute; left: 10%; top: 20%;width: 75%;">
+    <div class="col-md-4">
+    <form action="/authenticate" method="POST">
+      <h2 class="text-info pb-2"><b>Create Account</b></h2>
+          <div class="row pb-2">
+            <div class="col">
+              <input type="hidden" name="address" value="{{request.full_path}}">
+              <input type="text" class="form-control mr-sm-2" name="username" placeholder="Username" required>
+            </div>
+          </div>
+          <div class="row pb-4">
+            <div class="col">
+              <input type="password" class="form-control mr-sm-2" name="password" placeholder="Password" required>
+            </div>
+          </div>
+      <input class="btn btn-warning text-dark shadow mb-5" type="submit" name="submit" value = "Register">
+    </form>
+    </div>
+  </div>
+  	 <div class = "boxed" style="position: absolute; left: 40%; top: 25%;">
+	 	<h5>
+      <b>Welcome to Brick Breaking out of High School!</b><br><br>
+      If you don't have an account, you can register for one. You must be logged in
+      to play. This requirement is only to ensure that every user gets the <b>full</b> experience.<br>
+      Accounts allow for the full feature set, including saving, records, upgrading, etc.
+      <br><br>
+      Every new user will start out with 1000 coins. Visit the store to buy upgrades or other creative buffs.<br>
+      Each game allows you to collect more coins than you already have to make further<br>
+      attempts insanely more fun! Spend your coins wisely.
+	 	</h5>
+	 </div>
+</div>
+{% endblock %}
