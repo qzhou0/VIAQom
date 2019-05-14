@@ -108,7 +108,7 @@ def authenticate():
             return redirect(curr_page)
         return render_template("index.html", username = "", errors = True, alerts=["Incorrect Credentials"], logged_in = False)
     # REGISTERING
-    else:
+    if request.form["submit"] == "Register":
         if len(username.strip()) != 0 and not database.checkuser(username):
             if len(password.strip()) != 0:
                 # add account to DB

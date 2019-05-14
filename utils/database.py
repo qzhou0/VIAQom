@@ -3,7 +3,7 @@
 # P02: NewYorkHoldEm
 import sqlite3
 
-dbfile = "data/userdata.db"
+dbfile = "../data/userdata.db"
 
 def initdb():
     return sqlite3.connect(dbfile)
@@ -167,3 +167,11 @@ def fetchchips(user):
     db.close()
 
     return chips
+
+def change_display(user, display):
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()
+    c.execute("UPDATE accts SET display = ? WHERE user = ?",(display,user,))
+    db.commit()
+    db.close()
+    return "Name updated"
