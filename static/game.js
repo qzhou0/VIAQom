@@ -3,8 +3,13 @@ var c = document.getElementById("playground");
 var ctx = c.getContext("2d");
 
 var id;
-var radius = 1;
+var radius = 25;
 var growing = true;
+var xVel = 1;
+var yVel = 2;
+var rectX = c.width/2;
+var rectY = c.height/2;
+var isDead = true;
 
 ctx.fillStyle = "blue";
 
@@ -14,30 +19,36 @@ var clear = function(e){
 
 var dvdLogoSetup = function(){
   window.cancelAnimationFrame(id);
-  var rectWidth = 100;
+  var rectWidth = 50;
   var rectHeight = 50;
 
-  var rectX = Math.floor(Math.random() * (c.width-rectWidth));
-  var rectY =  Math.floor(Math.random() * (c.height-rectHeight));
 
-  var xVel = 2;
-  var yVel = 2;
-  var logo = new Image();
-  logo.src = "logo_dvd.jpg"
+
+  //var xVel = 1;
+  //var yVel = 2;
 
   var dvd_mover = function(){
     window.cancelAnimationFrame(id);
     clear();
     //ctx.fillRect( rectX, rectY, rectWidth, rectHeight);
-    ctx.fillRect(rectX, rectY, rectWidth, rectHeight)
+    //ctx.fillRect(rectX, rectY, rectWidth, rectHeight)
+    ctx.beginPath();
+    ctx.arc(rectX,rectY-radius,radius,0,2*Math.PI);
+    ctx.stroke();
+    ctx.fill();
     rectX += xVel;
     rectY += yVel;
 
-    if(rectX <= 0 || rectX  + rectWidth >= c.width){
+    if(rectX - radius <= 0 || rectX + radius >= c.width){
       xVel *= -1;
     }
-    if(rectY <= 0 || rectY  + rectHeight >= c.height){
+    if(rectY - 2*radius <= 0){
       yVel *= -1;
+    }
+    if(rectY  >= c.height){
+      isDead = true;
+      xVel = 0;
+      yVel = 0;
     }
 
     id = window.requestAnimationFrame(dvd_mover);
@@ -45,5 +56,20 @@ var dvdLogoSetup = function(){
 
   dvd_mover()
 }
+
+c.addEventListener("click",
+  function(e){
+    if(isDead){
+    xVel = e.offsetX - rectX;
+    yVel = e.offsetY - rectY;
+    var ratio = Math.sqrt(4/(xVel*xVel + yVel*yVel));
+    console.log(xVel + " " + yVel);
+    xVel *= ratio;
+    yVel *= ratio;
+    console.log(xVel + " " + yVel);
+    isDead = false;
+  }
+  }
+);
 
 start.addEventListener("click", dvdLogoSetup);

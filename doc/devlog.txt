@@ -38,12 +38,12 @@ change design.pdf to reflect criticism, namely:
 
 isaacJ -- 13:16 2019-05-13
 --------------------------------------------------------------
-Added database functions for registering users 
+Added database functions for registering users
 ==============================================================
 
 ahnafK -- 12:58 2019-5-13
 --------------------------------------------------------------
-Tiny devlog change 
+Tiny devlog change
 started on the game part from dvd project basis
 ==============================================================
 
@@ -66,9 +66,9 @@ Discussions with database matters.
 
 ==============================================================
 
-
+ahnafK -- 13:21 2019-05-14
 --------------------------------------------------------------
-
+ball moving and velocity change on click
 ==============================================================
 
 
