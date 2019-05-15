@@ -1,12 +1,24 @@
-# VIAQom - Ahnaf Kazi, Isaac Jon, Qian Zhou, Vincent Chi
-# SoftDev1 pd8
-
 import sqlite3
 
 dbfile = "data/userdata.db"
 
 def initdb():
     return sqlite3.connect(dbfile)
+
+
+def createTable():
+    db = initdb()
+    c = db.cursor()
+    """Create the database if not already created"""
+
+    command = "CREATE TABLE IF NOT EXISTS users(username TEXT, password TEXT, displayname TEXT, coins INTEGER)"
+    c.execute(command)
+
+    command = "CREATE TABLE IF NOT EXISTS upgrades(username TEXT, upgrade TEXT, tier INTEGER)"
+    c.execute(command)
+
+    command = "CREATE TABLE IF NOT EXISTS highscores(username TEXT, score INTEGER)"
+    c.execute(command)
 
 def checkuser(user):
     db = initdb()
