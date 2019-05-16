@@ -50,6 +50,13 @@ pre {
     line-height: 18.5667px;
 }
 
+.navbar {
+  background-color: #1c0221;
+}
+
+.navbar-default .navbar-brand {
+    color: #394032;
+}
 
 #header-wrapper {
     background-color: #f0f2f3;
@@ -131,8 +138,8 @@ pre {
     color: #8a8b8c;
 }
 .boxed{
-    border: 1px solid red;
+    border: 1px solid black;
     border-width: 10px;
     margin:100px;
-    padding: 10px;
+    padding: 7px;
 }
