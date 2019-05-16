@@ -61,7 +61,6 @@ Corrections for said groundwork mostly completed.
 Discussions with database matters.
 ==============================================================
 
-
 ahnafK -- 13:21 2019-05-14
 --------------------------------------------------------------
 ball moving and velocity change on click
@@ -71,10 +70,17 @@ qianZ -- 21:50 2019-05-14
 --------------------------------------------------------------
 potential function for grid generation and movement
 ==============================================================
-ahanfk -- 13:08 2019-05-16
+
+ahanfK -- 13:08 2019-05-16
 --------------------------------------------------------------
 bounce off bricks
 vanish bricks
 fixed issue of multiple hits in one detected
 created an issue with insidedness
+==============================================================
+
+vincentC -- 14:21 2019-05-16
+--------------------------------------------------------------
+Stylish upgrades.
+More styling to come.
 ==============================================================
