@@ -10,7 +10,7 @@ ssl._create_default_https_context = ssl._create_unverified_context
 
 from flask import Flask, redirect, url_for, render_template, session, request, flash, get_flashed_messages
 
-from utils import database, api
+from utils import database
 
 
 # instantiate Flask object
@@ -37,7 +37,7 @@ def home():
     if user in session:
         if int(database.fetchchips(user)) < 0:
             return render_template("index.html", username = "", errors = True, alerts=["You have no chips left. Account suspended."], logged_in = False)
-        return render_template('login.html', username = user, alerts=[], errors = True, logged_in = True, game=database.readcurrmatch(user))
+        return render_template('landing.html', username = user, alerts=[], errors = True, logged_in = True, game=database.readcurrmatch(user))
     return render_template('index.html', username = "", errors = True, logged_in = False)
 
 @app.route('/register')
@@ -89,7 +89,7 @@ def login():
     '''
     if user in session:
         return redirect(url_for('home'))
-    return render_template('login.html',username = "", alerts=[], logged_in=False, game=database.readcurrmatch(user))
+    return render_template('landing.html',username = "", alerts=[], logged_in=False, game=database.readcurrmatch(user))
 
 @app.route('/authenticate', methods=['POST'])
 def authenticate():
@@ -106,9 +106,9 @@ def authenticate():
             session[username] = password
             setUser(username)
             return redirect(curr_page)
-        return render_template("index.html", username = "", errors = True, alerts=["Incorrect Credentials"], logged_in = False)
+        return render_template("index.html", username = "", errors = True, alerts=["Your username password combination was incorrect. Please try again."], logged_in = False)
     # REGISTERING
-    else:
+    if request.form["submit"] == "Register":
         if len(username.strip()) != 0 and not database.checkuser(username):
             if len(password.strip()) != 0:
                 # add account to DB
@@ -164,7 +164,7 @@ def updatepass():
         passdiff = (request.form["pass"] != database.getpassword(user))
         if passeq and passdiff:
             database.resetpassword(user, request.form["pass"])
-            return render_template('login.html', username = user, errors = True, alerts=["Successfully changed password"], logged_in = True, game=database.readcurrmatch(user))
+            return render_template('landing.html', username = user, errors = True, alerts=["Successfully changed password"], logged_in = True, game=database.readcurrmatch(user))
 
         passerrs = []
         if not passeq:

@@ -1,18 +1,19 @@
 <!-- VIAQom - Ahnaf Kazi, Isaac Jon, Qian Zhou, Vincent Chi  -->
 <!-- Home Page -->
 
-{% extends "templateLog.html" %}
+<!DOCTYPE html>
+{% extends "layer2.html" %}
 {% block title %} Home - Brick Breaking out of High School {% endblock %}
-
+{% block heading %} Login {% endblock %}
 {% block content %}
 	<div class="container">
 		<br>
-		<a class="text-dark" style="text-decoration: none;"><h1 class="text-center"> Brick Breaking out of High School </h1></a>
+		<a class="text-dark" style="text-decoration: none;"><h1 class="text-center"> <b>Brick Breaking out of High School </b></h1></a>
 	</div>
-	<div class = "container" style="position: absolute; left: 10%; top: 20%;width: 75%;">
+	<div class = "container text-center" style="position: absolute; left: 37%; top: 25%; width: 100%;">
 	  <div class="col-md-4">
 	    <form action="/authenticate" method="POST">
-	      <h2 class="text-info pb-2"><b>Login</b></h2>
+	      <h2 class="text-info pb-2"><b></b></h2>
 	        <div class="row pb-2">
 	          <div class="col">
 	            <input type="hidden" name="address" value="{{address}}">
@@ -28,16 +29,17 @@
 	     </form>
 	   </div>
 	 </div>
-	 <div class = "boxed" style="position: absolute; left: 40%; top: 15%;">
-	 	<h5>
-	 		<b>Welcome to Brick Breaking out of High School!</b><br><br>
-	 		If you don't have an account, you can register for one. You must be logged in
-	 		to play. This requirement is only here to ensure that every user gets the <b>full</b> experience.<br>
-			Accounts allow for the full feature set, including saving, records, upgrading, etc.
-	 		<br><br>
-	 		Every new user will start out with 1000 coins. Visit the store to buy upgrades or other creative buffs.<br>
+	 <div class = "boxed" style="position: absolute; left: 20%; top: 45%;">
+		 <h5>
+			<b>Welcome to Brick Breaking out of High School!</b><br></h5><h6>
+			The rules are simple. Hit the walls with your balls.<br><br>
+			If you have a null account, you can register one. You must be logged in
+			to play. <br>This requirement is only to ensure that every user gets the <b>full</b> experience.<br>
+			Logged in, the player will be able to upgrade themselves to an insane level.
+			<br><br>
+			Every new user will start out with 1000 coins. Visit the store to buy upgrades or other creative buffs.<br>
 			Each game allows you to collect more coins than you already have to make further<br>
 			attempts insanely more fun! Spend your coins wisely.
-	 	</h5>
+		</h6>
 	 </div>
 {% endblock %}
