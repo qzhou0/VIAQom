@@ -13,7 +13,7 @@ var isDead = true;
 
 var rectWidth = 100;
 var rectHeight = 50;
-var rects = [{'x':70,'y':20,'hp':1}]
+var rects = [{'x':70,'y':20,'hp':2, 'hit':false},{'x':170,'y':20,'hp':1, 'hit':false}]
 
 
 
@@ -22,14 +22,37 @@ var clear = function(e){
 }
 
 function blockCollision(rect){
-    var distX = Math.abs(ballX - rect["x"]-rectWidth/2);
-    var distY = Math.abs(ballY - rect["y"]-rectHeight/2);
 
-    if (distX > (rectWidth/2 + radius)) { return false; }
-    if (distY > (rectHeight/2 + radius)) { return false; }
+    var realX = ballX - rect["x"]-rectWidth/2
+    var realY = ballY - rect["y"]-rectHeight/2
+    var distX = Math.abs(realX);
+    var distY = Math.abs(realY);
 
-    if (distX <= (rectWidth/2)) { return true; }
-    if (distY <= (rectHeight/2)) { return true; }
+    if (distX > (rectWidth/2 + radius)) {
+      rect['hit'] = false;
+      return false;
+    }
+    if (distY > (rectHeight/2 + radius)) {
+      rect['hit'] = false;
+      return false;
+    }
+
+    if(rect['hit']){
+      return false;
+    }
+
+    if (distX <= (rectWidth/2)) {
+      yVel *= -1;
+
+      rect['hit'] = true;
+      return true;
+    }
+
+    if (distY <= (rectHeight/2)) {
+      xVel *= -1;
+      rect['hit'] = true;
+	    return true;
+    }
 
     var dx=distX-rectWidth/2;
     var dy=distY-rectHeight/2;
@@ -38,72 +61,72 @@ function blockCollision(rect){
 
 
 var dvdLogoSetup = function(){
-  window.cancelAnimationFrame(id);
-
-
-
-
-  //var xVel = 1;
-  //var yVel = 2;
-
-  var dvd_mover = function(){
     window.cancelAnimationFrame(id);
-    clear();
-    //ctx.fillRect( ballX, ballY, rectWidth, rectHeight);
-    //ctx.fillRect(ballX, ballY, rectWidth, rectHeight)
-    ctx.fillStyle = "red";
-    for(i=0; i<rects.length; i++){
-      block = rects[i];
-      if(block["hp"]>0){
-      if(blockCollision(block)){
-        ctx.fillStyle = "green";
-        block["hp"]--;
-        xVel*=-1;
-        yVel*=-1;
-      }
-      ctx.fillRect(block["x"],block["y"], rectWidth, rectHeight);
-    }
+    rects = [{'x':70,'y':20,'hp':1, 'hit':false},{'x':270,'y':70,'hp':1, 'hit':false}]
+
+
+
+    //var xVel = 1;
+    //var yVel = 2;
+
+    var dvd_mover = function(){
+	window.cancelAnimationFrame(id);
+	clear();
+	//ctx.fillRect( ballX, ballY, rectWidth, rectHeight);
+	//ctx.fillRect(ballX, ballY, rectWidth, rectHeight)
+	ctx.fillStyle = "red";
+	for(i=0; i<rects.length; i++){
+	    block = rects[i];
+	    if(block["hp"]>0){
+		if(blockCollision(block)){
+		    ctx.fillStyle = "white";
+		    block["hp"]--;
+		}
+		if(block["hp"]>0){
+		    ctx.fillRect(block["x"],block["y"], rectWidth, rectHeight);
+		}
+	    }
+	}
+
+	ctx.fillStyle = "blue";
+	ctx.beginPath();
+	ctx.arc(ballX,ballY-radius,radius,0,2*Math.PI);
+	ctx.stroke();
+	ctx.fill();
+	ballX += xVel;
+	ballY += yVel;
+
+	if(ballX - radius <= 0 || ballX + radius >= c.width){
+	    xVel *= -1;
+	}
+	if(ballY - 2*radius <= 0){
+	    yVel *= -1;
+	}
+	if(ballY  >= c.height){
+	    isDead = true;
+	    xVel = 0;
+	    yVel = 0;
+	}
+
+	id = window.requestAnimationFrame(dvd_mover);
     }
 
-    ctx.fillStyle = "blue";
-    ctx.beginPath();
-    ctx.arc(ballX,ballY-radius,radius,0,2*Math.PI);
-    ctx.stroke();
-    ctx.fill();
-    ballX += xVel;
-    ballY += yVel;
-
-    if(ballX - radius <= 0 || ballX + radius >= c.width){
-      xVel *= -1;
-    }
-    if(ballY - 2*radius <= 0){
-      yVel *= -1;
-    }
-    if(ballY  >= c.height){
-      isDead = true;
-      xVel = 0;
-      yVel = 0;
-    }
-
-    id = window.requestAnimationFrame(dvd_mover);
-  }
-
-  dvd_mover()
+    dvd_mover()
 }
 
 c.addEventListener("click",
-  function(e){
-    if(isDead){
-    xVel = e.offsetX - ballX;
-    yVel = e.offsetY - ballY;
-    var ratio = Math.sqrt(9/(xVel*xVel + yVel*yVel));
-    console.log(xVel + " " + yVel);
-    xVel *= ratio;
-    yVel *= ratio;
-    console.log(xVel + " " + yVel);
-    isDead = false;
-  }
-  }
-);
+		   function(e){
+		       if(isDead){
+			   xVel = e.offsetX - ballX;
+			   yVel = e.offsetY - ballY;
+			   var ratio = Math.sqrt(9/(xVel*xVel + yVel*yVel));
+			   console.log(xVel + " " + yVel);
+			   xVel *= ratio;
+			   yVel *= ratio;
+			   console.log(xVel + " " + yVel);
+			   isDead = false;
+		       }
+		   }
+		  );
 
 start.addEventListener("click", dvdLogoSetup);
