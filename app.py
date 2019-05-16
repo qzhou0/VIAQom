@@ -106,7 +106,7 @@ def authenticate():
             session[username] = password
             setUser(username)
             return redirect(curr_page)
-        return render_template("index.html", username = "", errors = True, alerts=["Incorrect Credentials"], logged_in = False)
+        return render_template("index.html", username = "", errors = True, alerts=["Your username password combination was incorrect. Please try again."], logged_in = False)
     # REGISTERING
     if request.form["submit"] == "Register":
         if len(username.strip()) != 0 and not database.checkuser(username):
