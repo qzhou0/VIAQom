@@ -76,6 +76,11 @@ def newuser(user, password):
 
     return True
 
+def addupgrade(user, upg, ti):
+    db = initdb()
+    c = db.cursor()
+    c.execute("SELECT upgrade FROM upgrades WHERE username = ? AND upgrade = upg")
+
 def changecoins(user, newcoins):
     db = initdb()
     c = db.cursor()
