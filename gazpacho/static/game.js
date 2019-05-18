@@ -11,8 +11,7 @@ var ballX = c.width/2;
 var ballY = c.height/2;
 var isDead = true;
 
-var rectWidth = 100;
-var rectHeight = 50;
+var side = 50;
 var rects = [{'x':70,'y':20,'hp':2, 'hit':false},{'x':170,'y':20,'hp':1, 'hit':false}]
 
 
@@ -22,17 +21,23 @@ var clear = function(e){
 }
 
 function blockCollision(rect){
-
-    var realX = ballX - rect["x"]-rectWidth/2
-    var realY = ballY - rect["y"]-rectHeight/2
+    var realX = ballX - rect["x"]-side/2
+    var realY = ballY - rect["y"]-side/2
     var distX = Math.abs(realX);
     var distY = Math.abs(realY);
 
-    if (distX > (rectWidth/2 + radius)) {
+    function recalc(){
+      realX = ballX - rect["x"]-side/2
+      realY = ballY - rect["y"]-side/2
+      distX = Math.abs(realX);
+      distY = Math.abs(realY);
+    }
+
+    if (distX > (side/2 + radius)) {
       rect['hit'] = false;
       return false;
     }
-    if (distY > (rectHeight/2 + radius)) {
+    if (distY > (side/2 + radius)) {
       rect['hit'] = false;
       return false;
     }
@@ -41,21 +46,39 @@ function blockCollision(rect){
       return false;
     }
 
-    if (distX <= (rectWidth/2)) {
+    if(distX - (side/2 + radius) > distY - (side/2 + radius)){
       yVel *= -1;
-
+      while(distX <= (side/2 + radius)){
+        ballX += realX/distX;
+        recalc()
+      }
+      if (distY <= (side/2 + radius)) {
+        while(distY <= (side/2 + radius)){
+          ballY += realY/distY;
+          recalc();
+        }
+      }
       rect['hit'] = true;
       return true;
     }
-
-    if (distY <= (rectHeight/2)) {
+    else {
       xVel *= -1;
+      while(distY <= (side/2 + radius)){
+        recalc();
+        ballY += realY/distY;
+      }
+      if (distX <= (side/2 + radius)) {
+        while(distX <= (side/2 + radius)){
+          recalc();
+          ballX += realX/distX;
+        }
+      }
       rect['hit'] = true;
 	    return true;
     }
 
-    var dx=distX-rectWidth/2;
-    var dy=distY-rectHeight/2;
+    var dx=distX-side/2;
+    var dy=distY-side/2;
     return (dx*dx+dy*dy<=(radius*radius));
 }
 
@@ -72,8 +95,8 @@ var dvdLogoSetup = function(){
     var dvd_mover = function(){
 	window.cancelAnimationFrame(id);
 	clear();
-	//ctx.fillRect( ballX, ballY, rectWidth, rectHeight);
-	//ctx.fillRect(ballX, ballY, rectWidth, rectHeight)
+	//ctx.fillRect( ballX, ballY, side, side);
+	//ctx.fillRect(ballX, ballY, side, side)
 	ctx.fillStyle = "red";
 	for(i=0; i<rects.length; i++){
 	    block = rects[i];
@@ -83,7 +106,7 @@ var dvdLogoSetup = function(){
 		    block["hp"]--;
 		}
 		if(block["hp"]>0){
-		    ctx.fillRect(block["x"],block["y"], rectWidth, rectHeight);
+		    ctx.fillRect(block["x"],block["y"], side, side);
 		}
 	    }
 	}
