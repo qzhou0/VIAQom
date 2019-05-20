@@ -47,6 +47,15 @@ def register():
         return redirect(url_for('home'))
     return render_template('register.html',username = "", logged_in=False)
 
+@app.route('/login')
+def loginpage():
+    '''
+    Generates register page after pressing register. Checks session.
+    '''
+    if user in session:
+        return redirect(url_for('home'))
+    return render_template('index.html',username = "", logged_in=False)
+
 @app.route('/play')
 def newgame():
     '''
