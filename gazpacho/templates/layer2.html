@@ -5,9 +5,17 @@
 {% extends "layer1.html" %}
 {% block login %}
 {% if not logged_in %}
+<div class="collapse d-flex flex-row-reverse" id="navbarSupportedContent">
+  <div>
     <form class="form-inline my-2 my-lg-0" action="/register">
            <button class="form-control btn btn-outline-info my-2 my-sm-0" type="submit">Register</a>
     </form>
+  </div>
+  <div>
+    <form class="form-inline my-2 my-lg-0" action="/login">
+           <button class="form-control btn btn-outline-info my-2 my-sm-0" type="submit">Login</a>
+    </form>
+  </div>
 {% endif %}
 {% if logged_in %}
 <div class="collapse d-flex flex-row-reverse" id="navbarSupportedContent">
