@@ -14,9 +14,53 @@ var ballX = c.width/2;
 var ballY = c.height/2;
 var isDead = true;
 
-var rectWidth = 100;
-var rectHeight = 50;
-var rects = [{'x':70,'y':20,'hp':2, 'hit':false},{'x':170,'y':20,'hp':1, 'hit':false}]
+var width=c.width;
+var height=c.height;
+var blocks=9;
+var numrows=12;
+
+var rectWidth = width/blocks;
+var rectHeight =height/numrows;
+
+var rects = []//[{'x':70,'y':20,'hp':2, 'hit':false},{'x':170,'y':20,'hp':1, 'hit':false}]
+
+var grid = function(){
+    //clear();
+    var i = 0;
+    while (i<rects.length){
+	//console.log(empty[i][0],empty[i][1]);
+	ctx.fillStyle="red";
+	ctx.fillRect(rects[i]['x'],rects[i]['y'],rectWidth,rectHeight);
+	i+=1;
+    }
+};
+var down=function(){
+    for (i=0;i<rects.length;i++){
+	rects[i]['y']+=rectHeight;
+    }
+};
+var newRow=function(range=1){//each time this is called, refreshes board with the addition of boards in RANGE rows, and all other rows move down
+    var rate=0.5;
+    down()
+    for (j=0;j<range;j++){
+	
+	for (i=0;i<blocks;i++){
+	    if (!([i*rectWidth,j*rectHeight] in rects)){
+		if (Math.random()>rate){
+		    d={};
+		    d['x']=i*rectWidth;
+		    d['y']=j*rectHeight;
+		    d['hp']=1;
+		    d['hit']=false;
+		    rects.push(d);
+		}
+	    }
+	}
+    }
+    //grid();
+};
+
+
 var circles=[]
 
 
@@ -82,7 +126,7 @@ var dvdLogoSetup = function(){
     var dvd_mover = function(){
 	window.cancelAnimationFrame(id);
 	clear();
-
+	
 
 	ballX += xVel;
 	ballY += yVel;
@@ -100,6 +144,9 @@ var dvdLogoSetup = function(){
 		}
 		if(block["hp"]>0){
 		    ctx.fillRect(block["x"],block["y"], rectWidth, rectHeight);
+		}
+		else{
+		    rects.pop(i);
 		}
 	    }
 	}
@@ -122,9 +169,14 @@ var dvdLogoSetup = function(){
 	    yVel *= -1;
 	}
 	else if(ballY+radius>= c.height){
+	    if (! isDead){
+		newRow();
+	    }
 	    isDead = true;
 	    xVel = 0;
 	    yVel = 0;
+	    
+	    
 	}
 
 	for (i=0;i<circles.length;i++){
@@ -141,6 +193,7 @@ var dvdLogoSetup = function(){
 c.addEventListener("click",function(e){
     console.log('click',xVel , ":x,y:" , yVel);
     if(isDead){
+	
 	xVel = e.offsetX - ballX;
 	yVel = e.offsetY - ballY;
 	var ratio = Math.sqrt(100/(xVel*xVel + yVel*yVel));
