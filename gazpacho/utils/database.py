@@ -69,12 +69,22 @@ def newuser(user, password):
     db = initdb()
     c = db.cursor()
 
-    c.execute("INSERT INTO users VALUES(?,?,?,?)", (user, password,str(randName), 0))
+    c.execute("INSERT INTO users VALUES(?,?,?,?)", (user, password,str(randName), 1000))
 
     db.commit()
     db.close()
 
     return True
+
+def fetchupgrades(user):
+    db = initdb()
+    c = db.cursor()
+    c.execute("SELECT coins FROM users WHERE username = ?", (user, ))
+    coins = c.fetchone()[0]
+
+    db.close()
+
+    return coins
 
 def addupgrade(user, upg, ti):
     db = initdb()

@@ -148,8 +148,8 @@ def profile():
     Generates profile page after pressing profile button. Checks session.
     '''
     if user in session:
-        chips = database.fetchchips(user)
-        return render_template('profile.html', username = user, numchips=chips, matches=database.getpastmatches(user), logged_in = True)
+        coins = database.fetchcoins(user)
+        return render_template('profile.html', username = user, numcoins=coins, logged_in = True)
     return render_template('index.html', username = "", errors = True, logged_in = False)
 
 @app.route('/changepass')
