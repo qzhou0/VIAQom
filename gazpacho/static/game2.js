@@ -13,6 +13,8 @@ var yVel = 3;
 var ballX = c.width/2;
 var ballY = c.height/2;
 var isDead = true;
+var canHitX = true;
+var canHitY = true;
 
 var blockid=0;
 
@@ -48,7 +50,7 @@ var newRow=function(range=1){//each time this is called, refreshes board with th
     down()
     var countadded=0;
     for (j=0;j<range;j++){
-	
+
 	for (i=0;i<blocks;i++){
 	    if (!([i*rectWidth,j*rectHeight] in rectCoors)){
 		if (Math.random()>rate){
@@ -57,7 +59,7 @@ var newRow=function(range=1){//each time this is called, refreshes board with th
 		    d['hp']=1;
 		    d['x']=i*rectWidth;
 		    d['y']=j*rectHeight;
-		    
+
 		    d['hit']=false;
 		    countadded++;
 		    blockid++;
@@ -97,10 +99,13 @@ var coll = function(rect){
 	 ballY<rect['y']+rectHeight+radius)){
 	if (ballX>rect['x']-radius-epsilonX &&
 	    ballX<rect['x']+rectWidth+radius+epsilonX){
-	    
+
 	    //yVel*=-1;
+      if(canHitX){
 	    xVel*=-1;
+      }
 	    rect['hit'] = true;
+      canHitX = false;
 	    circles.push([ballX,ballY]);
 	    return true;
 	}
@@ -111,15 +116,18 @@ var coll = function(rect){
 	if (ballY>rect['y']-radius-epsilonY &&
 	 ballY<rect['y']+rectHeight+radius+epsilonY){
 	    //xVel*=-1;
-	    yVel*=-1;
+      if(canHitY){
+	       yVel*=-1;
+      }
 	    circles.push([ballX,ballY]);
-	
+
 	    rect['hit']=true;
+      canHitY = false;
 	    return true;
 	}
     }
     rect['hit']=false;
-    
+
     return false;
 
 }
@@ -137,11 +145,12 @@ var dvdLogoSetup = function(){
     var dvd_mover = function(){
 	window.cancelAnimationFrame(id);
 	clear();
-	
+
 
 	ballX += xVel;
 	ballY += yVel;
-
+  canHitX = true;
+  canHitY = true;
 	//ctx.fillRect( ballX, ballY, rectWidth, rectHeight);
 	//ctx.fillRect(ballX, ballY, rectWidth, rectHeight)
 	ctx.fillStyle = "red";
@@ -178,7 +187,7 @@ var dvdLogoSetup = function(){
 	//console.log('xvel',xVel,'yvel',yVel);
 
 
-	
+
 	ctx.fillStyle = "blue";
 	ctx.beginPath();
 	ctx.arc(ballX,ballY,radius,0,2*Math.PI);
@@ -186,7 +195,7 @@ var dvdLogoSetup = function(){
 	ctx.fill();
 
 
-	
+
 	if(ballX - radius <= 0 || ballX + radius >= c.width){
 	    xVel *= -1;
 	}
@@ -201,8 +210,8 @@ var dvdLogoSetup = function(){
 	    isDead = true;
 	    xVel = 0;
 	    yVel = 0;
-	    
-	    
+
+
 	}
 
 	for (i=0;i<circles.length;i++){
@@ -219,7 +228,7 @@ var dvdLogoSetup = function(){
 c.addEventListener("click",function(e){
     //console.log('click',xVel , ":x,y:" , yVel);
     if(isDead){
-	
+
 	xVel = e.offsetX - ballX;
 	yVel = e.offsetY - ballY;
 	var ratio = Math.sqrt(100/(xVel*xVel + yVel*yVel));
