@@ -2,8 +2,8 @@
 <!-- Profile page for viewing match history, high scores, etc. Also allows password change. -->
 
 {% extends "layer2.html" %}
-{% block title %} Profile - {{ username }} {% endblock %}
-{% block heading %} Profile {% endblock %}
+{% block title %} Store - {{ username }} {% endblock %}
+{% block heading %} Store {% endblock %}
 
 {% block content %}
 <div class="container">
@@ -26,7 +26,7 @@
 	    			Current Coin Amount:
 	    		</th>
 	    		<td style="text-align: left;">
-	    			{{ coins }}
+	    			{{ numcoins }}
 	    		</td>
 	    	</tr>
 	    </table>
@@ -39,19 +39,18 @@
 
 	    <br>
 	    <br><br>
-	    <p style="font-size:160%;"><b>Note: If a rank of -1 is displayed, it means you restarted the game</b></p>
 
 	  </div>
 
 	  <div class="col-md-8">
 	  	<h3>
-	  		Match History
+	  		Skins
 	  	</h3>
 	    <table class="table">
 	    	<tr>
-		      <th scope="col">Time</th>
-		      <th scope="col">Chips</th>
-		      <th scope="col">Rank</th>
+		      <th scope="col">Name</th>
+		      <th scope="col">Preview</th>
+		      <th scope="col">Cost</th>
 		    </tr>
 	    	{% for match in matches %}
 		    	<tr {% if match['rank'] < 4 %}
@@ -75,6 +74,39 @@
 
 			<!-- Purchase history -->
 	  </div>
+
+    <div class="col-md-8">
+      <h3>
+        Upgrades
+      </h3>
+      <table class="table">
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Tier</th>
+          <th scope="col">Price</th>
+        </tr>
+        {% for match in matches %}
+          <tr {% if match['rank'] < 4 %}
+                style="background-color: #8AF393"
+              {% else %}
+                style="background-color: #F38A8A"
+              {% endif %}>
+            <th scope="row">
+              {{ match['time'] }}
+            </th>
+            <td style="text-align: left;">
+              {{ match['chips'] }}
+            </td>
+            <td style="text-align: left;">
+              {{ match['rank'] }}
+            </td>
+          </tr>
+        {% endfor %}
+      </table>
+      <br><br>
+
+      <!-- Purchase history -->
+    </div>
 	</div>
 </div>
 {% endblock %}
