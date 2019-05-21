@@ -14,6 +14,8 @@ var ballX = c.width/2;
 var ballY = c.height/2;
 var isDead = true;
 
+var blockid=0;
+
 var width=c.width;
 var height=c.height;
 var blocks=9;
@@ -23,6 +25,7 @@ var rectWidth = width/blocks;
 var rectHeight =height/numrows;
 
 var rects = []//[{'x':70,'y':20,'hp':2, 'hit':false},{'x':170,'y':20,'hp':1, 'hit':false}]
+var rectCoors=[]
 
 var grid = function(){
     //clear();
@@ -37,26 +40,34 @@ var grid = function(){
 var down=function(){
     for (i=0;i<rects.length;i++){
 	rects[i]['y']+=rectHeight;
+	rectCoors[i][1]+=rectHeight;
     }
 };
 var newRow=function(range=1){//each time this is called, refreshes board with the addition of boards in RANGE rows, and all other rows move down
     var rate=0.5;
     down()
+    var countadded=0;
     for (j=0;j<range;j++){
 	
 	for (i=0;i<blocks;i++){
-	    if (!([i*rectWidth,j*rectHeight] in rects)){
+	    if (!([i*rectWidth,j*rectHeight] in rectCoors)){
 		if (Math.random()>rate){
 		    d={};
+		    d['id']=blockid;
+		    d['hp']=1;
 		    d['x']=i*rectWidth;
 		    d['y']=j*rectHeight;
-		    d['hp']=1;
+		    
 		    d['hit']=false;
+		    countadded++;
+		    blockid++;
 		    rects.push(d);
+		    rectCoors.push([d['x'],d['y']]);
 		}
 	    }
 	}
     }
+    console.log('added ',countadded);
     //grid();
 };
 
@@ -116,7 +127,7 @@ var coll = function(rect){
 
 var dvdLogoSetup = function(){
     window.cancelAnimationFrame(id);
-    rects = [{'x':70,'y':20,'hp':1, 'hit':false},{'x':270,'y':70,'hp':1, 'hit':false}]
+    rects = [];
 
 
 
@@ -134,23 +145,37 @@ var dvdLogoSetup = function(){
 	//ctx.fillRect( ballX, ballY, rectWidth, rectHeight);
 	//ctx.fillRect(ballX, ballY, rectWidth, rectHeight)
 	ctx.fillStyle = "red";
+	toRemove=[]
 	for(i=0; i<rects.length; i++){
 	    block = rects[i];
-	    if(block["hp"]>0){
-		if(coll(block)){
-		    ctx.fillStyle = "white";
-		    console.log('hp',block['hp']);
-		    block["hp"]--;
-		}
-		if(block["hp"]>0){
-		    ctx.fillRect(block["x"],block["y"], rectWidth, rectHeight);
-		}
-		else{
-		    rects.pop(i);
-		}
+	    //if(block["hp"]>0){
+	    if (block['hp']<=0){
+		rects.pop(i);
+		rectCoors.pop(i);
+		continue;
 	    }
+	    else if(coll(block)){
+		ctx.fillStyle = "green";
+		console.log('hp',block['hp'],'xy',block['x'],block['y']);
+		block["hp"]--;
+		console.log(block['id'], ' hit!');
+	    }
+	    if(block["hp"]>0){
+		ctx.fillRect(block["x"],block["y"], rectWidth, rectHeight);
+	    }
+	    else{
+		ctx.fillRect(block["x"],block["y"], rectWidth, rectHeight);
+		toRemove.push(i);
+
+	    }
+	    //}
 	}
-	console.log('xvel',xVel,'yvel',yVel);
+	while (toRemove.length!=0){
+	    var j=toRemove.pop();
+	    rects.splice(j,1);
+	    rectCoors.splice(j,1);
+	}
+	//console.log('xvel',xVel,'yvel',yVel);
 
 
 	
@@ -168,9 +193,10 @@ var dvdLogoSetup = function(){
 	else if(ballY - 2*radius <= 0){
 	    yVel *= -1;
 	}
-	else if(ballY+radius>= c.height){
+	else if(ballY+radius+yVel>= c.height){
 	    if (! isDead){
 		newRow();
+		console.log(rects);
 	    }
 	    isDead = true;
 	    xVel = 0;
@@ -191,16 +217,16 @@ var dvdLogoSetup = function(){
 }
 
 c.addEventListener("click",function(e){
-    console.log('click',xVel , ":x,y:" , yVel);
+    //console.log('click',xVel , ":x,y:" , yVel);
     if(isDead){
 	
 	xVel = e.offsetX - ballX;
 	yVel = e.offsetY - ballY;
 	var ratio = Math.sqrt(100/(xVel*xVel + yVel*yVel));
-	console.log(xVel + ":x,y:" + yVel);
+	//console.log(xVel + ":x,y:" + yVel);
 	xVel *= ratio;
 	yVel *= ratio;
-	console.log(xVel + ":x,y: " + yVel);
+	//console.log(xVel + ":x,y: " + yVel);
 	isDead = false;
     }
 });
