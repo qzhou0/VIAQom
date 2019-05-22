@@ -79,12 +79,12 @@ def newuser(user, password):
 def fetchupgrades(user):
     db = initdb()
     c = db.cursor()
-    c.execute("SELECT coins FROM users WHERE username = ?", (user, ))
-    coins = c.fetchone()[0]
+    c.execute("SELECT upgrade,tier FROM upgrades WHERE username = ?", (user, ))
+    upgrades = c.fetchall()
 
     db.close()
 
-    return coins
+    return upgrades
 
 def addupgrade(user, upg, ti):
     db = initdb()

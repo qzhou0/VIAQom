@@ -26,7 +26,7 @@
 	    			Current Coin Amount:
 	    		</th>
 	    		<td style="text-align: left;">
-	    			{{ coins }}
+	    			{{ numcoins }}
 	    		</td>
 	    	</tr>
 	    </table>
@@ -39,7 +39,6 @@
 
 	    <br>
 	    <br><br>
-	    <p style="font-size:160%;"><b>Note: If a rank of -1 is displayed, it means you restarted the game</b></p>
 
 	  </div>
 
@@ -69,6 +68,27 @@
 		    			{{ match['rank'] }}
 		    		</td>
 		    	</tr>
+		    {% endfor %}
+	    </table>
+	    <br><br>
+
+			<!-- Purchase history -->
+	  </div>
+
+		<div class="col-md-8">
+	  	<h3>
+	  		Upgrades
+	  	</h3>
+	    <table class="table">
+	    	<tr>
+		      <th scope="col">Name</th>
+		      <th scope="col">Tier</th>
+		    </tr>
+	    	{% for upgrade in upgrades %}
+		    	<tr>
+						<td> NamePlaceholder </td>
+						<td> TierPlaceholder</td>
+					</tr>
 		    {% endfor %}
 	    </table>
 	    <br><br>
