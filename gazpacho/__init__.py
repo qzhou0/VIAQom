@@ -56,28 +56,6 @@ def loginpage():
         return redirect(url_for('home'))
     return render_template('index.html',username = "", logged_in=False)
 
-@app.route('/play')
-def newgame():
-    '''
-    Brings up the game's html after starting/continuing game. Checks session.
-    '''
-    if user in session:
-        if int(database.fetchchips(user)) < 0:
-            return render_template("index.html", username = "", errors = True, alerts=["You have no chips left. Account suspended."], logged_in = False)
-        return render_template('poker.html', bank = 500, username = user, logged_in=True)
-    return render_template('index.html', username = "", errors = True, logged_in = False)
-
-@app.route('/playagain', methods=['GET', 'POST'])
-def newgame2():
-    '''
-    Short circuits restarting the game.
-    '''
-    winnings = 0;
-    if request.method == 'POST':
-        winnings = int(request.form['mydata'])
-        database.changechips(user,database.fetchchips(user) + winnings - 500)
-        return ""
-
 @app.route('/getrank', methods=['GET', 'POST'])
 def getrank():
     '''
