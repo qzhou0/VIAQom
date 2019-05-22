@@ -67,6 +67,7 @@
 		    		<td style="text-align: left;">
 		    			{{ match['rank'] }}
 		    		</td>
+
 		    	</tr>
 		    {% endfor %}
 	    </table>
@@ -84,12 +85,18 @@
           <th scope="col">Name</th>
           <th scope="col">Tier</th>
           <th scope="col">Price</th>
+					<th scope="col"></th>
         </tr>
         {% for upgrade in upgrades %}
           <tr>
 						<td> {{upgrade[0]}} </td>
 						<td> {{upgrade[1]}}</td>
 						<td> {{upgrade[1]*1000+1000}} </td>
+						<td>
+							<form class="form-inline my-2 my-lg-0" action="/buy">
+				    	<button class="btn btn-outline-warning ml-4" type="submit" name="buybutton" value="{{upgrade[0]}}"> Buy </button>
+				    </form>
+						</td>
           </tr>
         {% endfor %}
       </table>

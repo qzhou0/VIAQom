@@ -91,21 +91,24 @@ def fetchupgrades(user):
 
     return upgrades
 
-def addupgrade(user, upg, ti):
+def buyupgrade(user, upg):
     db = initdb()
     c = db.cursor()
-    if checkupgrade(user, upg):
-        c.execute("UPDATE upgrades SET tier = ? WHERE username = ?", (newpass, user))
-
-def checkupgrade(user, upg):
-    db = initdb()
-    c = db.cursor()
-    c.execute("SELECT upgrade FROM upgrades WHERE username = ? AND upgrade = ?", (user, upg))
-
-    res = c.fetchall()
-
-    return len(res) > 0
-
+    # Selects the amount of coins the user has
+    c.execute("SELECT coins from users WHERE username = ?", (user,))
+    coins = c.fetchone()[0]
+    #Selects tier of the specified upgrade
+    c.execute("SELECT tier FROM upgrades WHERE username = ? AND upgrade = ?", (user, upg))
+    upgtier = c.fetchone()[0]
+    price = upgtier * 1000 + 1000
+    if price > coins:
+        return False
+    else:
+        c.execute("UPDATE upgrades SET tier = ? WHERE username = ? AND upgrade = ?", (upgtier+1, user, upg))
+        c.execute("UPDATE users SET coins = ? WHERE username = ?", (coins-price, user))
+        db.commit()
+        db.close()
+        return True
 
 def changecoins(user, newcoins):
     db = initdb()

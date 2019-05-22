@@ -142,6 +142,22 @@ def store():
         return render_template('store.html', username = user, numcoins = coins, upgrades = upgrades, logged_in = True)
     return render_template('index.html', username = "", errors = True, logged_in = False)
 
+@app.route('/buy')
+def buy():
+    '''
+    Buys upgrade, deducts the price from user's wallet, increases the tier of the selected upgrade
+    '''
+    if user in session:
+        coins = database.fetchcoins(user)
+        upgrades = database.fetchupgrades(user)
+        if not(database.buyupgrade(user, request.args["buybutton"])):
+            return render_template('store.html', username = user, numcoins = coins, upgrades = upgrades, alerts = ["Sorry, insufficient funds"], logged_in = True)
+        else:
+            coins = database.fetchcoins(user)
+            upgrades = database.fetchupgrades(user)
+            return render_template('store.html', username = user, numcoins = coins, upgrades = upgrades, logged_in = True)
+    return render_template('index.html', username = "", errors = True, logged_in = False)
+
 @app.route('/changepass')
 def changepass():
     '''
