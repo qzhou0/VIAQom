@@ -11,13 +11,21 @@
     <div class="col-md-12">
       Welcome to Brick Breaking out of High School.<br>
       Click the play button to start!
-      <a class="btn btn-warning ml-4" href="/play" role="button" style="position: absolute; left: -15%; top: 5%">
+      <a class="btn btn-warning ml-4" id="start" role="button" style="position: absolute; left: -15%; top: 5%">
           Play
       </a>
     </div>
 
   </div>
 
+  <style>
+    #playground { border: 1px solid black }
+  </style>
   <br>
+  <canvas width="500" height="650" id="playground">
+  </canvas>
+
+  <script src="static/game2.js">
+  </script>
 </div>
 {% endblock %}

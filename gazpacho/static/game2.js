@@ -1,15 +1,15 @@
 var start = document.getElementById("start");
 var c = document.getElementById("playground");
 var ctx = c.getContext("2d");
-var stop = document.getElementById("stop");
+//var stop = document.getElementById("stop");
 
 
-
+var loss = false;
 var id;
 var radius = 10;
 var growing = true;
 var xVel = 0;
-var yVel = 3;
+var yVel = 10;
 var ballX = c.width/2;
 var ballY = c.height/2;
 var isDead = true;
@@ -56,7 +56,7 @@ var newRow=function(range=1){//each time this is called, refreshes board with th
 		if (Math.random()>rate){
 		    d={};
 		    d['id']=blockid;
-		    d['hp']=1;
+		    d['hp']=1+ Math.floor(2*Math.random());
 		    d['x']=i*rectWidth;
 		    d['y']=j*rectHeight;
 
@@ -90,11 +90,11 @@ var coll = function(rect){
     // y collide
     var epsilonX=Math.abs(xVel);
     var epsilonY=Math.abs(yVel);
-    dot(rect['x']-radius,rect['y']-radius);
-    dot(rect['x']+radius+rectWidth,rect['y']+radius+rectHeight);
-    dot(rect['x']-radius,rect['y']+radius+rectHeight);
-    dot(rect['x']+radius+rectWidth,rect['y']-radius);
-    dot(ballX,ballY);
+    // dot(rect['x']-radius,rect['y']-radius);
+    // dot(rect['x']+radius+rectWidth,rect['y']+radius+rectHeight);
+    // dot(rect['x']-radius,rect['y']+radius+rectHeight);
+    // dot(rect['x']+radius+rectWidth,rect['y']-radius);
+    // dot(ballX,ballY);
     if ((ballY>rect['y']-radius &&
 	 ballY<rect['y']+rectHeight+radius)){
 	if (ballX>rect['x']-radius-epsilonX &&
@@ -156,6 +156,7 @@ var dvdLogoSetup = function(){
 	ctx.fillStyle = "red";
 	toRemove=[]
 	for(i=0; i<rects.length; i++){
+      ctx.fillStyle="red";
 	    block = rects[i];
 	    //if(block["hp"]>0){
 	    if (block['hp']<=0){
@@ -214,9 +215,9 @@ var dvdLogoSetup = function(){
 
 	}
 
-	for (i=0;i<circles.length;i++){
-	    dot(circles[i][0],circles[i][1]);
-	}
+	//for (i=0;i<circles.length;i++){
+	//    dot(circles[i][0],circles[i][1]);
+	//}
 
 
 	id = window.requestAnimationFrame(dvd_mover);
@@ -245,6 +246,6 @@ var stopIt=function(){
   window.cancelAnimationFrame(id);
 };
 
-stop.addEventListener('click',stopIt);
+//stop.addEventListener('click',stopIt);
 
 start.addEventListener("click", dvdLogoSetup);

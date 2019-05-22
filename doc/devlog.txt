@@ -144,9 +144,11 @@ Made profile run.
 Added store groundwork.
 ==============================================================
 
-(Work off this template!) topherM -- 1999-12-31 23:59
+ahnafK -- 2019-05-22 13:20
 --------------------------------------------------------------
-
+game on actual page.
+changed size of window
+random 1 or 2 hp
 ==============================================================
 
 (Work off this template!) topherM -- 1999-12-31 23:59
