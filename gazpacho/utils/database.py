@@ -70,6 +70,11 @@ def newuser(user, password):
     c = db.cursor()
 
     c.execute("INSERT INTO users VALUES(?,?,?,?)", (user, password,str(randName), 1000))
+    c.execute("INSERT INTO upgrades VALUES(?,?,?)", (user, "Extra Ball", 0))
+    c.execute("INSERT INTO upgrades VALUES(?,?,?)", (user, "Explosive Ball", 0))
+    c.execute("INSERT INTO upgrades VALUES(?,?,?)", (user, "Rocket Ball", 0))
+    c.execute("INSERT INTO upgrades VALUES(?,?,?)", (user, "Income Multiplier", 0))
+
 
     db.commit()
     db.close()

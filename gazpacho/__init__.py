@@ -127,7 +127,8 @@ def profile():
     '''
     if user in session:
         coins = database.fetchcoins(user)
-        return render_template('profile.html', username = user, numcoins = coins, logged_in = True)
+        upgrades = database.fetchupgrades(user)
+        return render_template('profile.html', username = user, numcoins = coins, upgrades = upgrades, logged_in = True)
     return render_template('index.html', username = "", errors = True, logged_in = False)
 
 @app.route('/store')
@@ -138,7 +139,7 @@ def store():
     if user in session:
         coins = database.fetchcoins(user)
         upgrades = database.fetchupgrades(user)
-        return render_template('store.html', username = user, numcoins = coins, userupgrades = upgrades, logged_in = True)
+        return render_template('store.html', username = user, numcoins = coins, upgrades = upgrades, logged_in = True)
     return render_template('index.html', username = "", errors = True, logged_in = False)
 
 @app.route('/changepass')

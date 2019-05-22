@@ -86,20 +86,10 @@
           <th scope="col">Price</th>
         </tr>
         {% for upgrade in upgrades %}
-          <tr {% if match['rank'] < 4 %}
-                style="background-color: #8AF393"
-              {% else %}
-                style="background-color: #F38A8A"
-              {% endif %}>
-            <th scope="row">
-              {{ match['time'] }}
-            </th>
-            <td style="text-align: left;">
-              {{ match['chips'] }}
-            </td>
-            <td style="text-align: left;">
-              {{ match['rank'] }}
-            </td>
+          <tr>
+						<td> {{upgrade[0]}} </td>
+						<td> {{upgrade[1]}}</td>
+						<td> {{upgrade[1]*1000+1000}} </td>
           </tr>
         {% endfor %}
       </table>
