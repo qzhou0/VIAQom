@@ -12,16 +12,18 @@ var xVel = 0;
 var yVel = 10;
 var ballX = c.width/2;
 var ballY = c.height/2;
-var isDead = true;
+var isDead = false;
 var canHitX = true;
 var canHitY = true;
 
 var blockid=0;
 
+
+
 var width=c.width;
 var height=c.height;
 var blocks=9;
-var numrows=12;
+var numrows=20;
 
 var rectWidth = width/blocks;
 var rectHeight =height/numrows;
@@ -156,7 +158,7 @@ var dvdLogoSetup = function(){
 	ctx.fillStyle = "red";
 	toRemove=[]
 	for(i=0; i<rects.length; i++){
-      ctx.fillStyle="red";
+      
 	    block = rects[i];
 	    //if(block["hp"]>0){
 	    if (block['hp']<=0){
@@ -170,7 +172,17 @@ var dvdLogoSetup = function(){
 		block["hp"]--;
 		console.log(block['id'], ' hit!');
 	    }
-	    if(block["hp"]>0){
+	    hp=block['hp'];
+	    if(hp>0){
+		if (hp==1){
+		    ctx.fillStyle='red';
+		}
+		else if (hp==2){
+		    ctx.fillStyle='purple';
+		}
+		else{
+		    ctx.fillStyle='black';
+		}
 		ctx.fillRect(block["x"],block["y"], rectWidth, rectHeight);
 	    }
 	    else{
