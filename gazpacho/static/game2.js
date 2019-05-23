@@ -3,10 +3,15 @@ var c = document.getElementById("playground");
 var ctx = c.getContext("2d");
 //var stop = document.getElementById("stop");
 
+//variables
+var blocks=9;
+var numrows=20;
+var radius = 10;
+var block_fertility=.3;
 
 var loss = false;
 var id;
-var radius = 10;
+
 var growing = true;
 var xVel = 0;
 var yVel = 10;
@@ -22,8 +27,6 @@ var blockid=0;
 
 var width=c.width;
 var height=c.height;
-var blocks=9;
-var numrows=20;
 
 var rectWidth = width/blocks;
 var rectHeight =height/numrows;
@@ -48,14 +51,14 @@ var down=function(){
     }
 };
 var newRow=function(range=1){//each time this is called, refreshes board with the addition of boards in RANGE rows, and all other rows move down
-    var rate=0.5;
+    var rate=block_fertility;
     down()
     var countadded=0;
     for (j=0;j<range;j++){
 
 	for (i=0;i<blocks;i++){
 	    if (!([i*rectWidth,j*rectHeight] in rectCoors)){
-		if (Math.random()>rate){
+		if (Math.random()<rate){
 		    d={};
 		    d['id']=blockid;
 		    d['hp']=1+ Math.floor(2*Math.random());
