@@ -161,6 +161,15 @@ isaacJ -- 2019-05-22 19:48
 Added purchase for upgrades functionality
 ==============================================================
 
+qianZ -- 2019-05-27 14:30
+--------------------------------------------------------------
+tried some more features in game2.js:
+      made multiple balls possible
+      increasing hps of bricks
+      range of brick birth hp
+still need to connect js with backend and user's choosing in frontend
+==============================================================
+
 (Work off this template!) topherM -- 1999-12-31 23:59
 --------------------------------------------------------------
 
