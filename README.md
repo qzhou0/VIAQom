@@ -1,7 +1,10 @@
-# Break Breaking out of High School 
-# -- VIAQom
+# Break Breaking out of High School  -- VIAQom
 
-## Vincent CHi (frontend), Isaac Jon (backend), Ahnaf Kazi (js), Qian Zhou(PM)
+## Roles
+- Vincent CHi (frontend)
+- Isaac Jon (backend)
+- Ahnaf Kazi (js)
+- Qian Zhou(PM)
 
 ## Overview
 
