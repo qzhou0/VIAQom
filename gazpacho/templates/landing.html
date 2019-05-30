@@ -8,42 +8,39 @@
 {% block heading %} Home {% endblock %}
 {% block content %}
 
-<meta charset="utf-8">
-<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-
-
-<body class="app header-fixed sidebar-md-show sidebar-fixed">
+<div class = "container">
+<body class=" sidebar-fixed">
 <div class="sidebar">
 <nav class="sidebar-nav">
 <ul class="nav">
-<li class="nav-title">Nav Title</li>
-.   qekgnqoegqioegbioqebg
+<li class="nav-title">Commentary</li>
+    TBD
 </ul>
 </nav>
-
+</div>
+</body>
+  </div>
 
 <div class = "container">
   <div class="row">
     <div class="col-md-12">
-      Welcome to Brick Breaking out of High School.<br>
-      Click the play button to start!<br>
-      qefuqebguiqebgi
-      <a class="btn btn-warning ml-4" id="start" role="button" style="position: absolute; left: -15%; top: 5%">
-        Play
+      <a class="btn btn-warning ml-4" id="start" role="button" style="position: absolute; left: 0%; top: 2000%;">
+        <b>Click to Play</b>
       </a>
     </div>
 
   </div>
 
+
   <style>
     #playground { border: 1px solid black }
   </style>
   <br>
-  <canvas width="650" height="600" id="playground" style="margin-bottom:100px">
+  <canvas width="650" height="600" id="playground" style="margin-bottom:200px; margin-left:350px">
   </canvas>
   <br>
   <script src="static/game2.js">
   </script>
 </div>
-</body>
+
 {% endblock %}
