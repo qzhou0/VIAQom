@@ -176,9 +176,9 @@ trailing balls instead of density
 sql error fixed itself with nothing done to it
 ==============================================================
 
-(Work off this template!) topherM -- 1999-12-31 23:59
+vincentC and isaacJ -- 2019-05-30 13:18
 --------------------------------------------------------------
-
+Added sidebar to landing page
 ==============================================================
 
 (Work off this template!) topherM -- 1999-12-31 23:59
