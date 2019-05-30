@@ -3,6 +3,8 @@ var c = document.getElementById("playground");
 var ctx = c.getContext("2d");
 //var stop = document.getElementById("stop");
 
+
+
 //variables
 var blocks=15;
 var numrows=20;
@@ -16,6 +18,8 @@ var id;
 
 var canHitX = true;
 var canHitY = true;
+
+var firstBall = true;
 
 var width=c.width;
 var height=c.height;
@@ -31,18 +35,32 @@ var rectCoors=[]
 
 var addBall=function(n){
     while (n>0){
-	b2={'x':c.width/4,
-	    'y':c.height/2,
-	    'xVel':0,
-	    'yVel':10,
+      if(firstBall){
+        xVel = 0;
+        yVel = 10;
+        x = c.width/2;
+        y = c.height/2;
+        firstBall = false;
+      }
+      else{
+        x = balls[0]['x'];
+        y = balls[0]['y'];
+        xVel = balls[0]['xVel'];
+  	    yVel = balls[0]['yVel'];
+      }
+	b2={'x':x,
+	    'y':y,
+	    'xVel':xVel,
+	    'yVel':yVel,
 	    'isDead':false,
-	    'id':ballid
+	    'id':ballid,
+      'wait':ballid
 	   };
 	balls.push(b2);
 	n-=1;
 	ballid+=1;
     }
-	
+
 }
 addBall(5);
 
@@ -172,8 +190,12 @@ var dvdLogoSetup = function(){
 
 	for (b=0;b<balls.length;b++){
 	    ball=balls[b];
+      if(ball['wait'] > 0){
+        ball['wait']--;
+      }else{
 	    ball['x'] += ball['xVel'];
 	    ball['y']+= ball['yVel'];
+    }
 	    canHitX = true;
 	    canHitY = true;
 	    //ctx.fillRect( ballX, ballY, rectWidth, rectHeight);
@@ -181,7 +203,7 @@ var dvdLogoSetup = function(){
 	    ctx.fillStyle = "red";
 	    toRemove=[]
 	    for(i=0; i<rects.length; i++){
-		
+
 		block = rects[i];
 		//if(block["hp"]>0){
 		if (block['hp']<=0){
@@ -217,7 +239,7 @@ var dvdLogoSetup = function(){
 		else{
 		    ctx.fillRect(block["x"],block["y"], rectWidth, rectHeight);
 		    toRemove.push(i);
-		    
+
 		}
 		while (toRemove.length!=0){
 		    var j=toRemove.pop();
@@ -225,7 +247,7 @@ var dvdLogoSetup = function(){
 		    rectCoors.splice(j,1);
 		}
 	    }
-	
+
 	}
 
 	//console.log('xvel',xVel,'yvel',yVel);
@@ -238,7 +260,6 @@ var dvdLogoSetup = function(){
 	    ctx.arc(ball['x'],ball['y'],radius,0,2*Math.PI);
 	    ctx.stroke();
 	    ctx.fill();
-
 
 
 	    if(ball['x'] - radius <= 0 || ball['x'] + radius >= c.width){
@@ -285,13 +306,14 @@ c.addEventListener("click",function(e){
 	    //console.log(xVel + ":x,y:" + yVel);
 	    ball['xVel'] *= ratio;
 	    ball['yVel'] *= ratio;
+      ball['wait'] = ball['id']*4;
 	    //console.log(xVel + ":x,y: " + yVel);
 	    ball['isDead'] = false;
-	    
+
 	}
 	liveCount=balls.length;
     }
-    
+
 });
 
 //stop

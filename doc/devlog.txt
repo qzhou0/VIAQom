@@ -170,9 +170,10 @@ tried some more features in game2.js:
 still need to connect js with backend and user's choosing in frontend
 ==============================================================
 
-(Work off this template!) topherM -- 1999-12-31 23:59
+ahnafK -- 2019-05-30 13:05
 --------------------------------------------------------------
-
+trailing balls instead of density
+sql error fixed itself with nothing done to it
 ==============================================================
 
 (Work off this template!) topherM -- 1999-12-31 23:59
