@@ -190,8 +190,12 @@ var dvdLogoSetup = function(){
 
 	for (b=0;b<balls.length;b++){
 	    ball=balls[b];
+      if(ball['wait'] > 0){
+        ball['wait']--;
+      }else{
 	    ball['x'] += ball['xVel'];
 	    ball['y']+= ball['yVel'];
+    }
 	    canHitX = true;
 	    canHitY = true;
 	    //ctx.fillRect( ballX, ballY, rectWidth, rectHeight);
@@ -273,7 +277,6 @@ var dvdLogoSetup = function(){
 		    liveCount-=1;
 		}
 		ball['isDead'] = true;
-    ball['wait'] = ball['id']
 
 		//console.log(liveCount);
 		ball['xVel'] = 0;
@@ -303,6 +306,7 @@ c.addEventListener("click",function(e){
 	    //console.log(xVel + ":x,y:" + yVel);
 	    ball['xVel'] *= ratio;
 	    ball['yVel'] *= ratio;
+      ball['wait'] = ball['id']*4;
 	    //console.log(xVel + ":x,y: " + yVel);
 	    ball['isDead'] = false;
 
