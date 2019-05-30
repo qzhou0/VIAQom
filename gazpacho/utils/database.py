@@ -1,7 +1,10 @@
 import sqlite3
 import random
+import os
 
-dbfile = "data/userdata.db"
+DIR=os.path.dirname(__file__) or '.'
+DIR+='/../'
+dbfile = DIR+"/data/userdata.db"
 
 def initdb():
     return sqlite3.connect(dbfile)
