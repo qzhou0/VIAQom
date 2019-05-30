@@ -181,6 +181,11 @@ vincentC and isaacJ -- 2019-05-30 13:18
 Added sidebar to landing page
 ==============================================================
 
+qianZ -- 2019-05-30 17:49
+--------------------------------------------------------------
+rebooted messed up droplet and found errors 
+(actavia's db python file was helpful)
+
 (Work off this template!) topherM -- 1999-12-31 23:59
 --------------------------------------------------------------
 
