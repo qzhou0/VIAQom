@@ -35,7 +35,7 @@ def home():
     Generates mainpage. Passes user info.
     '''
     if user in session:
-        return render_template('landing.html', username = user, alerts=[], errors = True, logged_in = True, upgrades = database.fetchupgrades(user))
+        return render_template('landing.html', coins = database.fetchcoins(user),username = user, alerts=[], errors = True, logged_in = True, upgrades = database.fetchupgrades(user))
     return render_template('index.html', username = "", errors = True, logged_in = False)
 
 @app.route('/register')
