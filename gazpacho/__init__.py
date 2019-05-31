@@ -76,7 +76,7 @@ def login():
         return redirect(url_for('home'))
     return render_template('landing.html',username = "", alerts=[], logged_in=False, game=database.readcurrmatch(user))
 
-@app.route('/authenticate', methods=['POST'])
+@app.route('/authenticate', methods=['POST','GET'])#for some reason returns Method Not ALlowed without 'GET'
 def authenticate():
     '''
     Checks user and pass. Makes login and register work. Checks session.
