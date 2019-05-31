@@ -35,7 +35,7 @@ def home():
     Generates mainpage. Passes user info.
     '''
     if user in session:
-        return render_template('landing.html', coins = database.fetchcoins(user),username = user, alerts=[], errors = True, logged_in = True, upgrades = database.fetchupgrades(user))
+        return render_template('landing.html', coins = database.fetchcoins(user), username = user, alerts=[], errors = True, logged_in = True, upgrades = database.fetchupgrades(user))
     return render_template('index.html', username = "", errors = True, logged_in = False)
 
 @app.route('/register')
@@ -128,7 +128,7 @@ def profile():
     if user in session:
         coins = database.fetchcoins(user)
         upgrades = database.fetchupgrades(user)
-        return render_template('profile.html', username = user, numcoins = coins, upgrades = upgrades, logged_in = True)
+        return render_template('profile.html', username = user, coins = coins, numcoins = coins, upgrades = upgrades, logged_in = True)
     return render_template('index.html', username = "", errors = True, logged_in = False)
 
 @app.route('/store')
@@ -139,7 +139,7 @@ def store():
     if user in session:
         coins = database.fetchcoins(user)
         upgrades = database.fetchupgrades(user)
-        return render_template('store.html', username = user, numcoins = coins, upgrades = upgrades, logged_in = True)
+        return render_template('store.html', username = user, coins = coins, numcoins = coins, upgrades = upgrades, logged_in = True)
     return render_template('index.html', username = "", errors = True, logged_in = False)
 
 @app.route('/buy')
