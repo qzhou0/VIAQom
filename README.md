@@ -1,14 +1,17 @@
 # Break Breaking out of High School  -- VIAQom
 
 ## Roles
-- Vincent CHi (frontend)
-- Isaac Jon (backend)
-- Ahnaf Kazi (js)
-- Qian Zhou(PM)
+- Vincent Chi (FrontEnd e.g. BootStrap)
+- Isaac Jon (BackEnd e.g. Database)
+- Ahnaf Kazi (JavaScript)
+- Qian Zhou (Project Manager)
 
 ## Overview
 
-This is an implementation of breakbreaker, with upgrade features. 
+This is an implementation of breakbreaker, including cool features such as:
+- Coin feedback system that works with the game.
+- Creative upgrade features that improve gameplay experience.
+- Customization!
 
 ## Necessary Packages
 
@@ -16,7 +19,7 @@ The user can just run
 ` pip install -r requirements.txt`
 to install the necessary packages. 
 
-## Laucn Instructions
+## Launch Instructions
 
 ### Localhost
 
