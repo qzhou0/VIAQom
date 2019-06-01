@@ -35,9 +35,10 @@ If you do not yet have an apache server, [here](https://www.digitalocean.com/com
 
 1. Go to `/var/www/` and clone this github repository under the name `gazpacho`
 2. Add www-data write permissions by inputing `sudo chgrp -R www-data gazpacho` and `sudo chmod -R 777 gazpacho`
-3. Move the  `gazpacho.conf` file to `/etc/apache2/sites-available/`
-4. Install the requirements: `pip3 install -r requirements.txt`
-5. Install flask: `sudo apt install python-flask`
-6. Enable the site: `sudo a2ensite gazpacho`
-7. Restart/Reload the apache server: `sudo service apache2 restart`
+3. Change the Server Address in `gazpacho.conf` to the IP address of your server.
+4. Move the  `gazpacho.conf` file to `/etc/apache2/sites-available/`
+5. Install the requirements: `pip3 install -r requirements.txt`
+6. Install flask: `sudo apt install python-flask`
+7. Enable the site: `sudo a2ensite gazpacho`
+8. Restart/Reload the apache server: `sudo service apache2 restart`
 
