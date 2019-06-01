@@ -1,6 +1,7 @@
 var start = document.getElementById("start");
 var c = document.getElementById("playground");
 var ctx = c.getContext("2d");
+var comm = document.getElementById("comm");
 //var stop = document.getElementById("stop");
 
 
@@ -239,7 +240,9 @@ var dvdLogoSetup = function(){
 		else{
 		    ctx.fillRect(block["x"],block["y"], rectWidth, rectHeight);
 		    toRemove.push(i);
-
+        if(Math.random() > .3){
+        comm.innerHTML = "" + Math.random();
+      }
 		}
 		while (toRemove.length!=0){
 		    var j=toRemove.pop();

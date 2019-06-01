@@ -28,7 +28,7 @@ vincentC -- 14:25 2019-05-08
 --------------------------------------------------------------
 Devlog has been beautified.
 Initial groundwork is laid out (base templates).
-Corrections for said groundwork in progress.
+Personalization of groundwork in progress.
 ==============================================================
 
 all -- 14:19 2019-05-09
@@ -64,13 +64,13 @@ vincentC -- 13:00 2019-05-13
 --------------------------------------------------------------
 More groundwork is posted (login, register).
 Initial page now runs.
-Corrections for said groundwork in progress.
+Personilization of groundwork still in progress.
 ==============================================================
 
 vincentC -- 13:00 2019-05-14
 --------------------------------------------------------------
 More groundwork is posted (landing page).
-Corrections for said groundwork mostly completed.
+Personalization of groundwork mostly completed.
 Discussions with database matters.
 ==============================================================
 
@@ -100,8 +100,8 @@ created an issue with insidedness
 
 vincentC -- 14:21 2019-05-16
 --------------------------------------------------------------
-Stylish upgrades.
-More styling to come.
+Stylish upgrades for BUTTONS and website theme.
+Work started for more style upgrades.
 ==============================================================
 
 isaacJ -- 2019-05-17 13:20
@@ -116,7 +116,7 @@ attempted to fix insidedness
 
 vincentC -- 14:21 2019-05-17
 --------------------------------------------------------------
-Stylish renovations for every html file.
+Stylish renovations for layer template (affects every html file).
 ==============================================================
 
 qianZ -- 2019-05-18 00:14
@@ -178,15 +178,39 @@ sql error fixed itself with nothing done to it
 
 vincentC and isaacJ -- 2019-05-30 13:18
 --------------------------------------------------------------
-Added sidebar to landing page
+Added sidebar to landing page.
+- Made it fit in a proper place.
 ==============================================================
 
 qianZ -- 2019-05-30 17:49
 --------------------------------------------------------------
-rebooted messed up droplet and found errors 
+rebooted messed up droplet and found errors
 (actavia's db python file was helpful)
-
-(Work off this template!) topherM -- 1999-12-31 23:59
---------------------------------------------------------------
-
 ==============================================================
+
+ahnafK -- 2019-05-31 13:20
+--------------------------------------------------------------
+started pre version of random commentary
+==============================================================
+
+vincentC and isaacJ -- 2019-05-31 13:17
+--------------------------------------------------------------
+Navbar upgrades (Now tells the user where they are.)
+Scenarios.txt added for future coin feedback system.
+==============================================================
+
+use this template! -- 2019-05-31 13:17
+--------------------------------------------------------------
+template
+==============================================================
+
+use this template! -- 2019-05-31 13:17
+--------------------------------------------------------------
+template
+==============================================================
+
+use this template! -- 2019-05-31 13:17
+--------------------------------------------------------------
+template
+==============================================================
+

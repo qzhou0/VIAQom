@@ -1,0 +1,92 @@
+Note: A box cleared is worth 4 coins.
+X is the number of boxes cleared per round.
+
+A wizard blesses you.
+You get X * 3 amount of coins.
+
+After clearing X boxes, you trip and fall.
+You get X * 0.5 amount of coins.
+
+You happen upon a merchant, who needed your boxes.
+You get X * 2 amount of coins.
+
+You stumble upon a dragon's lair, finding 20 boxes.
+You find X + 80 coins.
+
+You didn't clear a single box, your boss demotes you.
+You lose 35 coins.
+
+You stumble upon an orc, who taxes your boxes.
+You get X * 0.25 amount of coins.
+
+You find a fairy inside one of the boxes.
+You get X * 2 amount of coins.
+
+You encounter a hydra during your adventure.
+The hydra attacks and you lose all your coins for the day.
+
+You encounter a hydra during your adventure.
+The hydra was sleepy and didn't give you much attention. You get X amount of coins.
+
+It was a normal day.
+You get X amount of coins.
+
+You're trapped in a cyclops' cave.
+You pay 20 coins to leave.
+
+After clearing X boxes, a demon tries to bargain a deal.
+He was there to collect the debt you owed. You get X * 0.5 amount of coins.
+
+After clearing X boxes, a demon tries to bargain a deal.
+A deal was struck, you get X * 1.5 amount of coins.
+
+You encountered a serpent and cleared X boxes.
+You get X * 0.75 amount of coins.
+
+You met a banker. He makes you a deal for your X boxes.
+You get X * 4 amount of coins.
+
+You win the lottery!
+You get X * 100 amount of coins.
+
+You lost X / 3 boxes while crossing a river.
+You get 2X / 3 amount of coins.
+
+Nothing special happened to you today.
+You get X amount of coins.
+
+You saw a cute dog today, which made you happy.
+You get X * 1.25 amount of coins.
+
+A black cat grants you good luck.
+You get X + 100 amount of coins.
+
+While walking to safety deposit for your coins, you encounter a group of goblins.
+You get 0 amount of coins.
+
+You've encounter Mr. Brown! Who gives you blessings for future endeavors.
+You get X * 3 amount of coins.
+
+You've encounter Mr. Brown! With your coding pants down.
+You lose 10 coins.
+
+You tried to dip out of school too early.
+You get X * 0.5 amount of coins.
+
+You bumped into the school bully who wanted his lunch money.
+You get X * 0.25 amount of coins.
+
+It was a windy day and some of the boxes you cleared were lost.
+You get X * 0.75 amount of coins.
+
+You came upon a shooting star.
+You get X * 5 amount of coins.
+
+You got close to winning the lottery.
+You get X * 10 amount of coins.
+
+Lord and behold! The market values your boxes more this season.
+You get X * 1.5 amount of coins.
+
+Aw drats! The market isn't interested in your boxes this season.
+You get X * 0.5 amount of coins.
