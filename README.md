@@ -41,4 +41,4 @@ If you do not yet have an apache server, [here](https://www.digitalocean.com/com
 6. Install flask: `sudo apt install python-flask`
 7. Enable the site: `sudo a2ensite gazpacho`
 8. Restart/Reload the apache server: `sudo service apache2 restart`
-
+9. Go to the IP address you wrote in step 3 to view the website.
