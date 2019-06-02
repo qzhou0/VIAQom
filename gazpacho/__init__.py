@@ -3,10 +3,8 @@
 
 import os
 import random
-import ssl
 import datetime
-
-ssl._create_default_https_context = ssl._create_unverified_context
+import json
 
 from flask import Flask, redirect, url_for, render_template, session, request, flash, get_flashed_messages
 
@@ -29,11 +27,18 @@ def setUser(userName):
     user = userName
 
 
-@app.route('/')
+@app.route('/', methods=['POST','GET'])
 def home():
     '''
     Generates mainpage. Passes user info.
     '''
+    if request.method=='POST':
+        print('POST')
+        result=database.fetchupgrades(user)
+        return json.dumps(result)
+        resp=make_response('{"response":'+result+'}')
+        resp.headers['Content-Type']="application/json"
+        return resp
     if user in session:
         return render_template('landing.html', coins = database.fetchcoins(user), username = user, alerts=[], errors = True, logged_in = True, upgrades = database.fetchupgrades(user))
     return render_template('index.html', username = "", errors = True, logged_in = False)
@@ -197,6 +202,22 @@ def clearmatchinprogress():
         return render_template('profile.html', username = user, numchips=database.fetchchips(user), matches=database.getpastmatches(user), logged_in = True, alerts=["Current Match Cleared"])
     return render_template('index.html', username = "", errors = True, logged_in = False)
 
+@app.route('/endgame', methods=['POST','GET'])
+def endgame():
+    '''
+    process information after the game has ended, for ajax calls
+    '''
+    if request.method == 'POST':
+        #print(request)
+        points=request.form['gains']
+        print('changing coins')
+        database.changecoins(user,int(points),1)
+        return ''
+    return redirect(url_for('home'))
+
+
 if __name__ == '__main__':
     app.debug = True
     app.run()
+
+

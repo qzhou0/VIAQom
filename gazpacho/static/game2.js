@@ -4,15 +4,43 @@ var ctx = c.getContext("2d");
 var comm = document.getElementById("comm");
 //var stop = document.getElementById("stop");
 
+var upgrades=[[0,0],[0,0],[0,0],[0,0]];
+var getInfo=function(){
+    var xhttp=new XMLHttpRequest();
+    var u;
+    xhttp.onreadystatechange=function(){
+	if (xhttp.readyState == 4) {
+	    u=this.responseText;
+	    console.log('getInfo called',u);
+	    u=JSON.parse(u);
+	    console.log('modified u',u);
+	    upgrades=u;
+	}
+    };
+    xhttp.open("POST","/",false);
+    xhttp.send();
+
+    return u;
+};
+
+getInfo();
+console.log('upg',upgrades);
+var extraBall=upgrades[0][1];
+var explosiveBall=upgrades[1][1];
+var rocketBall=upgrades[2][1];
+var inMultiplier=upgrades[3][1];
+
 
 
 //variables
 var blocks=15;
-var numrows=20;
+var numrows=15;
 var radius = 10;
 var block_fertility=.3;
 var maxHP=12;//max hp at birth
 var blockGrowth=.34;//value of HP added each time it falls down
+var lives=5;
+var points=00000;
 
 var loss = false;
 var id;
@@ -63,7 +91,7 @@ var addBall=function(n){
     }
 
 }
-addBall(5);
+addBall(1+extraBall);
 
 var liveCount=balls.length;
 
@@ -77,13 +105,27 @@ var grid = function(){
 	i+=1;
     }
 };
+var deductLife=function(){
+    lives-=1;
+    if (lives<=0){
+	//window.cancelAnimationFrame(id);
+	endGame();
+    }
+};
 var down=function(){
     for (i=0;i<rects.length;i++){
 	rects[i]['y']+=rectHeight;
 	rectCoors[i][1]+=rectHeight;
 	rects[i]['hp']+=blockGrowth;
+	if (rects[i]['y']>=height-rectHeight){
+	    console.log('deduct point at',rects['y'],height-rectHeight);
+	    deductLife();
+	}
     }
 };
+
+
+
 var newRow=function(range=1){//each time this is called, refreshes board with the addition of boards in RANGE rows, and all other rows move down
     var rate=block_fertility;
     down()
@@ -220,10 +262,7 @@ var dvdLogoSetup = function(){
 		}
 		hp=block['hp'];
 		if(hp>0){
-		    if (hp==0){
-			ctx.fillStyle='green';
-		    }
-		    else if(hp<=1){
+		    if(hp<=1){
 			ctx.fillStyle='orange';
 		    }
 		    else if (hp<4){
@@ -239,6 +278,7 @@ var dvdLogoSetup = function(){
 		}
 		else{
 		    ctx.fillRect(block["x"],block["y"], rectWidth, rectHeight);
+		    points+=block['points'];
 		    toRemove.push(i);
         if(Math.random() > .3){
         comm.innerHTML = "" + Math.random();
@@ -321,7 +361,29 @@ c.addEventListener("click",function(e){
 
 //stop
 var stopIt=function(){
-  window.cancelAnimationFrame(id);
+    window.cancelAnimationFrame(id);
+};
+
+var endGame=function(){
+    window.cancelAnimationFrame(id);
+    clear();
+    balls=[];
+    ballid=1;
+    blockid=0;
+    rects = []
+    rectCoors=[]
+    var xhttp=new XMLHttpRequest();
+    xhttp.onreadystatechange=function(){
+	if (xhttp.readyState == 4) {
+	    console.log('done');
+	}
+    };
+    xhttp.open("POST","/endgame");
+    xhttp.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+    xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhttp.send(encodeURIComponent('gains')+'='+encodeURIComponent(points));
+    //window.cancelAnimationFrame(id);
+    //clear();
 };
 
 //stop.addEventListener('click',stopIt);

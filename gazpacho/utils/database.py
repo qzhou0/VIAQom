@@ -108,15 +108,18 @@ def buyupgrade(user, upg):
         return False
     else:
         c.execute("UPDATE upgrades SET tier = ? WHERE username = ? AND upgrade = ?", (upgtier+1, user, upg))
-        changecoins(user, coins-price)# c.execute("UPDATE users SET coins = ? WHERE username = ?", (coins-price, user))
         db.commit()
         db.close()
+        changecoins(user, coins-price)# c.execute("UPDATE users SET coins = ? WHERE username = ?", (coins-price, user))
         return True
 
-def changecoins(user, newcoins):
+def changecoins(user, newcoins,add=0):
     db = initdb()
     c = db.cursor()
-
+    if add==1:
+	    c.execute("SELECT coins from users WHERE username = ?", (user,))
+	    coins = c.fetchone()[0]
+	    newcoins=newcoins+coins
     c.execute("UPDATE users SET coins = ? WHERE username = ?", (newcoins, user))
 
     db.commit()
