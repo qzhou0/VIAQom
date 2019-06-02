@@ -199,9 +199,13 @@ Navbar upgrades (Now tells the user where they are.)
 Scenarios.txt added for future coin feedback system.
 ==============================================================
 
-use this template! -- 2019-05-31 13:17
+qianZ -- 2019-06-01 22:03
 --------------------------------------------------------------
-template
+small change in database.py to make buying work, and to make changing coins work
+AJAX: functions in __init__.py and JS to
+	pass information about user and receive points addition/deduction to/from js
+	making coin addition after a game is ended, and the users' information to reflect ball situation
+	lives count, and functions to indicate the end of the game
 ==============================================================
 
 use this template! -- 2019-05-31 13:17
