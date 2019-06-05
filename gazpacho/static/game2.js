@@ -83,8 +83,10 @@ var addBall=function(n){
 	    'yVel':yVel,
 	    'isDead':false,
 	    'id':ballid,
-      'wait':ballid
+	    'wait':ballid,
+	    'type':'normal'
 	   };
+
 	balls.push(b2);
 	n-=1;
 	ballid+=1;
@@ -220,6 +222,12 @@ var coll = function(rect,ball){
 
 var dvdLogoSetup = function(){
     window.cancelAnimationFrame(id);
+
+    document.getElementById('start').disabled=true;
+
+    newGame();
+
+    
     rects = [];
 
 
@@ -278,7 +286,7 @@ var dvdLogoSetup = function(){
 		}
 		else{
 		    ctx.fillRect(block["x"],block["y"], rectWidth, rectHeight);
-		    points+=block['points'];
+		    points+=block['points']*(1+inMultiplier);
 		    toRemove.push(i);
         if(Math.random() > .3){
         comm.innerHTML = "" + Math.random();
@@ -365,13 +373,21 @@ var stopIt=function(){
 };
 
 var endGame=function(){
+
+    
+    
     window.cancelAnimationFrame(id);
+    document.getElementById('start').disabled=false;
     clear();
-    balls=[];
+
+
+    balls=[]
     ballid=1;
     blockid=0;
-    rects = []
-    rectCoors=[]
+    rects = [];
+    rectCoors=[];
+
+
     var xhttp=new XMLHttpRequest();
     xhttp.onreadystatechange=function(){
 	if (xhttp.readyState == 4) {
@@ -396,3 +412,37 @@ var ballsDown=function(){
 	balls[b]['x']=width/2;
     }
 }
+
+var newGame=function(){
+    getInfo();
+
+    extraBall=upgrades[0][1];
+    explosiveBall=upgrades[1][1];
+    rocketBall=upgrades[2][1];
+    inMultiplier=upgrades[3][1];
+
+    blocks=15;    numrows=15;
+    radius = 10;
+    block_fertility=.3;    blockGrowth=.34;
+    maxHP=12;
+
+    id=null;
+    lives=5;    points=00000;
+
+    loss = false;
+
+    canHitX = true;    canHitY = true;
+
+    firstBall = true;
+
+    width=c.width;    height=c.height;
+
+    rectWidth = width/blocks;    rectHeight =height/numrows;
+
+    balls=[];ballid=1;blockid=0;    rects = [];    rectCoors=[];
+
+    addBall(1+extraBall);
+
+    liveCount=balls.length;
+    
+};
