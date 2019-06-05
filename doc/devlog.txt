@@ -208,6 +208,13 @@ AJAX: functions in __init__.py and JS to
 	lives count, and functions to indicate the end of the game
 ==============================================================
 
+qianZ -- 2019-06-04 21:30
+--------------------------------------------------------------
+button-fy start: enable/disable button for game, enable new game to start after end
+enable income multiplier
+
+==============================================================
+
 use this template! -- 2019-05-31 13:17
 --------------------------------------------------------------
 template
