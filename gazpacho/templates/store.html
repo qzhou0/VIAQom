@@ -92,10 +92,26 @@
           <tr>
 						<td> {{upgrade[0]}} </td>
 						<td> {{upgrade[1]}}</td>
-						<td> {{upgrade[1]*1000+1000}} </td>
+						{% if upgrade[0] == 'Rocket Ball' %}
+							<td> 10000 </td>
+						{% else %}
+							<td> {{upgrade[1]*1000+1000}} </td>
+						{% endif %}
 						<td>
 							<form class="form-inline my-2 my-lg-0" action="/buy">
-				    	<button class="btn btn-outline-warning ml-4" type="submit" name="buybutton" value="{{upgrade[0]}}"> Buy </button>
+								{% if upgrade[0] == 'Rocket Ball' %}
+									{% if upgrade[1] == 1 %}
+										MAX
+									{% else %}
+										<button class="btn btn-outline-warning ml-4" type="submit" name="buybutton" value="{{upgrade[0]}}"> Buy </button>
+									{% endif %}
+								{% else %}
+									{% if upgrade[1] == 3 %}
+										MAX
+									{% else %}
+										<button class="btn btn-outline-warning ml-4" type="submit" name="buybutton" value="{{upgrade[0]}}"> Buy </button>
+									{% endif %}
+								{% endif %}
 				    </form>
 						</td>
           </tr>
