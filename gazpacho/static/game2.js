@@ -63,6 +63,7 @@ var rects = []//[{'id':,x':70,'y':20,'hp':2, 'hit':false},{'x':170,'y':20,'hp':1
 var rectCoors=[]
 
 var addBall=function(n){
+  rock=rocketBall;
     while (n>0){
       if(firstBall){
         xVel = 0;
@@ -84,8 +85,14 @@ var addBall=function(n){
 	    'isDead':false,
 	    'id':ballid,
 	    'wait':ballid,
-	    'type':'normal'
+	    'type':'n'//for normal
 	   };
+
+  if (rock >0){
+      b2['type']='r';//for rocket
+      rock-=1;
+  }
+
 
 	balls.push(b2);
 	n-=1;
@@ -189,7 +196,9 @@ var coll = function(rect,ball){
 
 	    //yVel*=-1;
 	    if(canHitX){
-		ball['xVel']*=-1;
+		if (ball['type']!='r'){
+		    ball['xVel']*=-1;
+		}
 	    }
 	    rect['hit'] = true;
 	    canHitX = false;
@@ -203,9 +212,12 @@ var coll = function(rect,ball){
 	if (ballY>rect['y']-radius-epsilonY &&
 	 ballY<rect['y']+rectHeight+radius+epsilonY){
 	    //xVel*=-1;
-      if(canHitY){
-	       ball['yVel']*=-1;
-      }
+	    if(canHitY){
+		if (ball['type']!='r'){
+
+		    ball['yVel']*=-1;
+		}
+	    }
 	    circles.push([ballX,ballY]);
 
 	    rect['hit']=true;
@@ -227,7 +239,7 @@ var dvdLogoSetup = function(){
 
     newGame();
 
-    
+
     rects = [];
 
 
@@ -286,7 +298,7 @@ var dvdLogoSetup = function(){
 		}
 		else{
 		    ctx.fillRect(block["x"],block["y"], rectWidth, rectHeight);
-		    points+=block['points']*(1+inMultiplier);
+		    points+=4*(1+inMultiplier);
 		    toRemove.push(i);
         if(Math.random() > .3){
         comm.innerHTML = "" + Math.random();
@@ -374,8 +386,8 @@ var stopIt=function(){
 
 var endGame=function(){
 
-    
-    
+
+
     window.cancelAnimationFrame(id);
     document.getElementById('start').disabled=false;
     clear();
@@ -444,5 +456,5 @@ var newGame=function(){
     addBall(1+extraBall);
 
     liveCount=balls.length;
-    
+
 };
