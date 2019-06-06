@@ -103,10 +103,12 @@ def buyupgrade(user, upg):
     #Selects tier of the specified upgrade
     c.execute("SELECT tier FROM upgrades WHERE username = ? AND upgrade = ?", (user, upg))
     upgtier = c.fetchone()[0]
-    # if upg == "Rocket Ball":
-    #     price = 10000
-    # else:
-    price = upgtier * 1000 + 1000
+    if upg == "Rocket Ball":
+        price = 10000
+    elif upg == "Extra Ball":
+        price = upgtier * 10 + 1000
+    else:
+        price = upgtier * 1000 + 1000
     if price > coins:
         return False
     else:
