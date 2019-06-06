@@ -214,17 +214,19 @@ button-fy start: enable/disable button for game, enable new game to start after 
 enable income multiplier
 ==============================================================
 
-isaacJ and vincentC -- 2019-06-06 12:47
---------------------------------------------------------------
-Added specific upgrade caps to Extra Ball and Rocket Ball
-==============================================================
-
 sdfp launch test :: QUAF+ -- 2019-06-06 01:56
 --------------------------------------------------------------
 Said team attempted to make a new version of the QUAF with emailing functions.
 as of checking, said team did not seem to have functional links in their index page.
 The index page looked very nice. 
 ==============================================================
+
+isaacJ and vincentC -- 2019-06-06 12:47
+--------------------------------------------------------------
+Added specific upgrade caps to Extra Ball and Rocket Ball
+==============================================================
+
+
 
 
 use this template! -- 2019-05-31 13:17
