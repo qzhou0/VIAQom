@@ -61,17 +61,6 @@ def loginpage():
         return redirect(url_for('home'))
     return render_template('index.html',username = "", logged_in=False)
 
-@app.route('/getrank', methods=['GET', 'POST'])
-def getrank():
-    '''
-    Passes rank for database/match history purposes.
-    '''
-    if request.method == 'POST':
-        place = (request.form['mydata'])
-        now = datetime.datetime.now()
-        database.addpastmatch(user,database.formatmatchdata(str(database.fetchchips(user)), str(place), now.strftime("%m/%d/%Y   %H'%M")))
-        return ""
-
 @app.route('/login', methods=['POST'])
 def login():
     '''
@@ -133,7 +122,7 @@ def profile():
     if user in session:
         coins = database.fetchcoins(user)
         upgrades = database.fetchupgrades(user)
-        return render_template('profile.html', username = user, coins = coins, numcoins = coins, upgrades = upgrades, logged_in = True)
+        return render_template('profile.html', username = user, coins = coins, upgrades = upgrades, logged_in = True)
     return render_template('index.html', username = "", errors = True, logged_in = False)
 
 @app.route('/store')
@@ -144,7 +133,7 @@ def store():
     if user in session:
         coins = database.fetchcoins(user)
         upgrades = database.fetchupgrades(user)
-        return render_template('store.html', username = user, coins = coins, numcoins = coins, upgrades = upgrades, logged_in = True)
+        return render_template('store.html', username = user, coins = coins, upgrades = upgrades, logged_in = True)
     return render_template('index.html', username = "", errors = True, logged_in = False)
 
 @app.route('/buy')
@@ -156,11 +145,11 @@ def buy():
         coins = database.fetchcoins(user)
         upgrades = database.fetchupgrades(user)
         if not(database.buyupgrade(user, request.args["buybutton"])):
-            return render_template('store.html', username = user, numcoins = coins, upgrades = upgrades, alerts = ["Sorry, insufficient funds"], logged_in = True)
+            return render_template('store.html', username = user, coins = coins, upgrades = upgrades, alerts = ["Sorry, insufficient funds"], logged_in = True)
         else:
             coins = database.fetchcoins(user)
             upgrades = database.fetchupgrades(user)
-            return render_template('store.html', username = user, numcoins = coins, upgrades = upgrades, logged_in = True)
+            return render_template('store.html', username = user, coins = coins, upgrades = upgrades, logged_in = True)
     return render_template('index.html', username = "", errors = True, logged_in = False)
 
 @app.route('/changepass')
