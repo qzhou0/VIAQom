@@ -1,0 +1,32 @@
+<!-- VIAQom - Ahnaf Kazi, Isaac Jon, Qian Zhou, Vincent Chi  -->
+<!-- Change password -->
+
+<!DOCTYPE html>
+{% extends "layer2.html" %}
+{% block title %} Brick Breaking out of High School {% endblock %}
+{% block heading %} Change Password {% endblock %}
+{% block content %}
+  <div class="container">
+		<a class="text-dark" style="text-decoration: none;"><h2 class="text-center"><b><br> Brick Breaking out of High School </b></h2></a>
+  </div>
+  <div class = "container text-center" style="position: absolute; left: 37%; top: 30%; width: 100%;">
+    <div class="col-md-4">
+    <form action="/updatepass" method="POST">
+      <h2 class="text-info pb-2"><b>Change Password</b></h2>
+          <div class="row pb-2">
+            <div class="col">
+              <input type="hidden" name="address" value="{{request.full_path}}">
+              <input type="text" class="form-control mr-sm-2" name="pass" placeholder="New Password" required>
+            </div>
+          </div>
+          <div class="row pb-4">
+            <div class="col">
+              <input type="password" class="form-control mr-sm-2" name="verpass" placeholder="Reenter Password" required>
+            </div>
+          </div>
+      <input class="btn btn-warning text-dark shadow mb-5" type="submit" name="submit" value = "Change">
+    </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

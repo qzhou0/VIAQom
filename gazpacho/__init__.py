@@ -169,26 +169,28 @@ def changepass():
     Generates change password page as an option from the profile page. Checks session.
     '''
     if user in session:
-        return render_template('changepass.html', username=user, alerts=[], logged_in = True)
+        coins = database.fetchcoins(user)
+        upgrades = database.fetchupgrades(user)
+        return render_template('changepass.html', username=user, coins = coins, upgrades = upgrades, alerts=[], logged_in = True)
     return render_template('index.html', username = "", errors = True, logged_in = False)
 
-@app.route('/updatepass', methods=["POST"])
+@app.route('/updatepass', methods=["GET","POST"])
 def updatepass():
     '''
     Communicates with database to change password.
     '''
     if user in session:
+        coins = database.fetchcoins(user)
+        upgrades = database.fetchupgrades(user)
         passeq = (request.form["pass"] == request.form["verpass"])
         passdiff = (request.form["pass"] != database.getpassword(user))
         if passeq and passdiff:
             database.resetpassword(user, request.form["pass"])
-            return render_template('landing.html', username = user, errors = True, alerts=["Successfully changed password"], logged_in = True, game=database.readcurrmatch(user))
-
-        passerrs = []
+            return render_template('landing.html', username = user, coins = coins, upgrades = upgrades, errors = True, alerts=["Successfully changed password"], logged_in = True)
         if not passeq:
-            passerrs.append("Passwords not the same")
+            return render_template("changepass.html", username=user, coins = coins, upgrades = upgrades, alerts=["Passwords do not match"], logged_in = True)
         if not passdiff:
-            passerrs.append("Password cannot be the same as previous password")
+            return render_template("changepass.html", username=user, coins = coins, upgrades = upgrades, alerts=["New password is not different from current password"], logged_in = True)
         return render_template("changepass.html", username=user, alerts=passerrs, logged_in = True)
     return render_template('index.html', username = "", errors = True, logged_in = False)
 
@@ -219,5 +221,3 @@ def endgame():
 if __name__ == '__main__':
     app.debug = True
     app.run()
-
-
