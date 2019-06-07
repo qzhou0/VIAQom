@@ -31,13 +31,13 @@ var rocketBall=upgrades[2][1];
 var inMultiplier=upgrades[3][1];
 
 
-
+var counter=0;
 //variables
 var blocks=15;
 var numrows=15;
 var radius = 10;
 var block_fertility=.3;
-var maxHP=12;//max hp at birth
+var maxHP=3+extraBall*1.5+10*rocketBall;//max hp at birth
 var blockGrowth=.34;//value of HP added each time it falls down
 var lives=5;
 var points=00000;
@@ -253,12 +253,12 @@ var dvdLogoSetup = function(){
 
 	for (b=0;b<balls.length;b++){
 	    ball=balls[b];
-      if(ball['wait'] > 0){
-        ball['wait']--;
-      }else{
-	    ball['x'] += ball['xVel'];
-	    ball['y']+= ball['yVel'];
-    }
+	    if(ball['wait'] > 0){
+		ball['wait']--;
+	    }else{
+		ball['x'] += ball['xVel'];
+		ball['y']+= ball['yVel'];
+	    }
 	    canHitX = true;
 	    canHitY = true;
 	    //ctx.fillRect( ballX, ballY, rectWidth, rectHeight);
@@ -298,10 +298,11 @@ var dvdLogoSetup = function(){
 		}
 		else{
 		    ctx.fillRect(block["x"],block["y"], rectWidth, rectHeight);
-		    points+=4*(1+inMultiplier);
+		    points+=4*(1+inMultiplier)*(Math.exp(counter/(Math.max(20-counter,4))));
+		    
 		    toRemove.push(i);
         if(Math.random() > .3){
-        comm.innerHTML = "" + Math.random();
+        comm.innerHTML = "" + Math.random()+'\n points:'+points;
       }
 		}
 		while (toRemove.length!=0){
@@ -324,7 +325,7 @@ var dvdLogoSetup = function(){
 	    ctx.stroke();
 	    ctx.fill();
 
-
+	    // reflection
 	    if(ball['x'] - radius <= 0 || ball['x'] + radius >= c.width){
 		ball['xVel'] *= -1;
 	    }
@@ -333,7 +334,13 @@ var dvdLogoSetup = function(){
 	    }
 	    else if(ball['y']+radius+ball['yVel']>= c.height){
 		if (liveCount==1 && !ball['isDead']){
+		    counter+=1;
 		    newRow();
+		    var ctr =parseInt(Math.log10(counter))-1;
+		    while (ctr>0){
+			newRow();
+		    }
+
 		    console.log(rects);
 		}
 		if (!ball['isDead']){
@@ -344,6 +351,10 @@ var dvdLogoSetup = function(){
 		//console.log(liveCount);
 		ball['xVel'] = 0;
 		ball['yVel'] = 0;
+	    }
+	    if (ball['y']<0){
+		ball['y']=c.height-radius;
+		ball['yVel']=ball['xVel']=0;
 	    }
 	}
 
@@ -361,6 +372,8 @@ var dvdLogoSetup = function(){
 c.addEventListener("click",function(e){
     //console.log('click',xVel , ":x,y:" , yVel);
     if(liveCount==0){
+	block_fertility+=0.03;
+	maxHP+=0.2;
 	for (b=0;b<balls.length;b++){
 	    ball=balls[b];
 	    ball['xVel'] = e.offsetX - ball['x'];
@@ -409,6 +422,7 @@ var endGame=function(){
     xhttp.open("POST","/endgame");
     xhttp.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
     xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    points=parseInt(points);
     xhttp.send(encodeURIComponent('gains')+'='+encodeURIComponent(points));
     //window.cancelAnimationFrame(id);
     //clear();
@@ -436,11 +450,12 @@ var newGame=function(){
     blocks=15;    numrows=15;
     radius = 10;
     block_fertility=.3;    blockGrowth=.34;
-    maxHP=12;
+    maxHP=maxHP=3+extraBall*1.5+10*rocketBall;
 
     id=null;
     lives=5;    points=00000;
 
+    counter=0;
     loss = false;
 
     canHitX = true;    canHitY = true;
