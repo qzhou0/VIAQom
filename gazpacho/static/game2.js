@@ -2,7 +2,7 @@ var start = document.getElementById("start");
 var c = document.getElementById("playground");
 var ctx = c.getContext("2d");
 var comm = document.getElementById("comm");
-//var stop = document.getElementById("stop");
+var haul = document.getElementById("haul");
 
 var upgrades=[[0,0],[0,0],[0,0],[0,0]];
 var getInfo=function(){
@@ -37,7 +37,7 @@ var blocks=15;
 var numrows=15;
 var radius = 10;
 var block_fertility=.3;
-var maxHP=3+extraBall*1.5+10*rocketBall;//max hp at birth
+var maxHP=3+extraBall*0.5+2*rocketBall;//max hp at birth
 var blockGrowth=.34;//value of HP added each time it falls down
 var lives=5;
 var points=00000;
@@ -55,6 +55,8 @@ var height=c.height;
 
 var rectWidth = width/blocks;
 var rectHeight =height/numrows;
+
+var X = 0;
 
 var balls=[]
 var ballid=1;
@@ -299,11 +301,11 @@ var dvdLogoSetup = function(){
 		else{
 		    ctx.fillRect(block["x"],block["y"], rectWidth, rectHeight);
 		    points+=4*(1+inMultiplier)*(Math.exp(counter/(Math.max(20-counter,4))));
-		    
+        X += 1;
 		    toRemove.push(i);
-        if(Math.random() > .3){
-        comm.innerHTML = "" + Math.random()+'\n points:'+points;
-      }
+      //   if(Math.random() > .3){
+      //   comm.innerHTML = "" + Math.random()+'\n points:'+points;
+      // }
 		}
 		while (toRemove.length!=0){
 		    var j=toRemove.pop();
@@ -335,6 +337,7 @@ var dvdLogoSetup = function(){
 	    else if(ball['y']+radius+ball['yVel']>= c.height){
 		if (liveCount==1 && !ball['isDead']){
 		    counter+=1;
+        newScenario();
 		    newRow();
 		    var ctr =parseInt(Math.log10(counter))-1;
 		    while (ctr>0){
@@ -389,7 +392,7 @@ c.addEventListener("click",function(e){
 	}
 	liveCount=balls.length;
     }
-
+    X = 0;
 });
 
 //stop
@@ -437,6 +440,26 @@ var ballsDown=function(){
 	balls[b]['y']=height-radius;
 	balls[b]['x']=width/2;
     }
+}
+
+var newScenario=function(){
+  var keys = Object.keys(scenarios);
+  var scenkey = keys[Math.floor(Math.random()*keys.length)];
+  var input = scenkey.replace("X", X);
+  comm.innerHTML = input;
+  if(scenkey[scenkey.length-1] == " "){
+    points += scenarios[scenkey] + X;
+  }
+  else if (scenarios[scenkey] < 0) {
+    points += scenarios[scenkey];
+  }
+  else{
+    points += scenarios[scenkey]*X;
+  }
+  if(points < 0){
+    points = 0;
+  }
+  haul.innerHTML = "" + Math.floor(points);
 }
 
 var newGame=function(){

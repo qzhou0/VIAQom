@@ -218,7 +218,7 @@ sdfp launch test :: QUAF+ -- 2019-06-06 01:56
 --------------------------------------------------------------
 Said team attempted to make a new version of the QUAF with emailing functions.
 as of checking, said team did not seem to have functional links in their index page.
-The index page looked very nice. 
+The index page looked very nice.
 ==============================================================
 
 isaacJ and vincentC -- 2019-06-06 12:47
@@ -231,6 +231,12 @@ qianZ -- 2019-06-06 20:09
 modified variables to make game more in accordance to user strength,
 	 and added progressive increasing difficulty and rewards
 made canvas a little smaller
+
+ahnafK -- 2019-06-07 03:04
+--------------------------------------------------------------
+implemented random events that affect coin count for each turn
+added coin counter to commentary bar.
+==============================================================
 
 use this template! -- 2019-05-31 13:17
 --------------------------------------------------------------
