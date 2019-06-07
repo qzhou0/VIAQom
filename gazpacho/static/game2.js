@@ -37,8 +37,9 @@ var blocks=15;
 var numrows=15;
 var radius = 10;
 var block_fertility=.3;
-var maxHP=3+extraBall*0.5+2*rocketBall;//max hp at birth
-var blockGrowth=.34;//value of HP added each time it falls down
+var birthHP=3+extraBall*2+4*rocketBall;//max hp at birth
+var maxHp = birthHP;
+var blockGrowth=.2;//value of HP added each time it falls down
 var lives=5;
 var points=00000;
 
@@ -237,6 +238,9 @@ var coll = function(rect,ball){
 var dvdLogoSetup = function(){
     window.cancelAnimationFrame(id);
 
+    var skin = new Image();
+    skin.src = "static/skin.png";
+
     document.getElementById('start').disabled=true;
 
     newGame();
@@ -284,19 +288,36 @@ var dvdLogoSetup = function(){
 		}
 		hp=block['hp'];
 		if(hp>0){
-		    if(hp<=1){
-			ctx.fillStyle='orange';
-		    }
-		    else if (hp<4){
-			ctx.fillStyle='red';
-		    }
-		    else if (hp<5){
-			ctx.fillStyle='purple';
-		    }
-		    else{
-			ctx.fillStyle='black';
-		    }
+		  //   if(hp<=3){
+			// ctx.fillStyle='cadetblue';
+		  //   }
+		  //   if(hp<=5){
+			// ctx.fillStyle='red';
+		  //   }
+      //   else if (hp<10){
+			// ctx.fillStyle='orange';
+		  //   }
+		  //   else if (hp<15){
+			// ctx.fillStyle='yellow';
+		  //   }
+		  //   else if (hp<20){
+			// ctx.fillStyle='green';
+		  //   }
+		  //   else if (hp<25){
+			// ctx.fillStyle='blue';
+		  //   }
+		  //   else if (hp<30){
+			// ctx.fillStyle='indigo';
+		  //   }
+		  //   else if (hp<35){
+			// ctx.fillStyle='purple';
+		  //   }
+		  //   else{
+			// ctx.fillStyle='black';
+		  //   }
+      ctx.fillStyle = 'rgb(' + Math.floor(255 - 42.5 * (hp-1)) + ', 14, 14)';
 		    ctx.fillRect(block["x"],block["y"], rectWidth, rectHeight);
+        ctx.drawImage(skin, block["x"],block["y"], rectWidth, rectHeight);
 		}
 		else{
 		    ctx.fillRect(block["x"],block["y"], rectWidth, rectHeight);
@@ -322,6 +343,9 @@ var dvdLogoSetup = function(){
 	for (b=0;b<balls.length;b++){
 	    ball=balls[b]
 	    ctx.fillStyle = "blue";
+      if(ball['type'] == 'r'){
+        ctx.fillStyle = "red";
+      }
 	    ctx.beginPath();
 	    ctx.arc(ball['x'],ball['y'],radius,0,2*Math.PI);
 	    ctx.stroke();
@@ -345,12 +369,14 @@ var dvdLogoSetup = function(){
 		    }
 
 		    console.log(rects);
+        ball['y']=c.height-radius;
+    		ball['yVel']=ball['xVel']=0;
 		}
 		if (!ball['isDead']){
 		    liveCount-=1;
 		}
 		ball['isDead'] = true;
-
+    ball['y']=c.height-radius;
 		//console.log(liveCount);
 		ball['xVel'] = 0;
 		ball['yVel'] = 0;
@@ -375,8 +401,8 @@ var dvdLogoSetup = function(){
 c.addEventListener("click",function(e){
     //console.log('click',xVel , ":x,y:" , yVel);
     if(liveCount==0){
-	block_fertility+=0.03;
-	maxHP+=0.2;
+	block_fertility+=0.01;
+	maxHP+=0.04;
 	for (b=0;b<balls.length;b++){
 	    ball=balls[b];
 	    ball['xVel'] = e.offsetX - ball['x'];
@@ -445,7 +471,7 @@ var ballsDown=function(){
 var newScenario=function(){
   var keys = Object.keys(scenarios);
   var scenkey = keys[Math.floor(Math.random()*keys.length)];
-  var input = scenkey.replace("X", X);
+  var input = scenkey.replace(/X/g, X)
   comm.innerHTML = input;
   if(scenkey[scenkey.length-1] == " "){
     points += scenarios[scenkey] + X;
@@ -472,8 +498,8 @@ var newGame=function(){
 
     blocks=15;    numrows=15;
     radius = 10;
-    block_fertility=.3;    blockGrowth=.34;
-    maxHP=maxHP=3+extraBall*1.5+10*rocketBall;
+    block_fertility=.3;    blockGrowth=.2;
+    maxHP=maxHP=3+extraBall*2+4*rocketBall;
 
     id=null;
     lives=5;    points=00000;

@@ -236,6 +236,7 @@ ahnafK -- 2019-06-07 03:04
 --------------------------------------------------------------
 implemented random events that affect coin count for each turn
 added coin counter to commentary bar.
+colors
 ==============================================================
 
 use this template! -- 2019-05-31 13:17
