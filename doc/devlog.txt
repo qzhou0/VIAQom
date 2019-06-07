@@ -226,8 +226,11 @@ isaacJ and vincentC -- 2019-06-06 12:47
 Added specific upgrade caps to Extra Ball and Rocket Ball
 ==============================================================
 
-
-
+qianZ -- 2019-06-06 20:09
+-------------------------------------------------------------
+modified variables to make game more in accordance to user strength,
+	 and added progressive increasing difficulty and rewards
+made canvas a little smaller
 
 use this template! -- 2019-05-31 13:17
 --------------------------------------------------------------
