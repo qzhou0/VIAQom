@@ -25,7 +25,7 @@ to install the necessary packages.
 
 1. Thee user should [construct a virtual environment](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/) and activate it. 
 2. install the necessary packages
-3. run `python __init__.py` in the gazpacho repository
+3. run `python __init__.py` in the bbohs repository
 4. go to `localhost:5000` on a browser
 
 
@@ -33,12 +33,12 @@ to install the necessary packages.
 
 If you do not yet have an apache server, [here](https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-ubuntu-18-04) is how to install it on an DO droplet. 
 
-1. Go to `/var/www/` and clone this github repository under the name `gazpacho`
-2. Add www-data write permissions by inputing `sudo chgrp -R www-data gazpacho` and `sudo chmod -R 777 gazpacho` at the `gazpacho/` directory
-3. Change the Server Address in `gazpacho/gazpacho.conf` to the IP address of your server.
-4. Move the  `gazpacho.conf` file to `/etc/apache2/sites-available/`
-5. Install the requirements on the first `gazpacho/` directory: `sudo pip3 install -r requirements.txt`
+1. Go to `/var/www/` and clone this github repository under the name `bbohs`
+2. Add www-data write permissions by inputing `sudo chgrp -R www-data bbohs` and `sudo chmod -R 777 bbohs` at the `bbohs/` directory
+3. Change the Server Address in `bbohs/bbohs.conf` to the IP address of your server.
+4. Move the  `bbohs.conf` file to `/etc/apache2/sites-available/`
+5. Install the requirements on the first `bbohs/` directory: `sudo pip3 install -r requirements.txt`
 6. Install flask: `sudo apt install python-flask` (only required if you did not install the requirements using sudo last step)
-7. Enable the site: `sudo a2ensite gazpacho`
+7. Enable the site: `sudo a2ensite bbohs`
 8. Restart/Reload the apache server: `sudo service apache2 restart`
 9. Go to the IP address you wrote in step 3 to view the website.
