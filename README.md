@@ -13,6 +13,8 @@ This is an implementation of breakbreaker, including cool features such as:
 - Creative upgrade features that improve gameplay experience.
 - Customization!
 
+## [Video](https://www.youtube.com/watch?v=u12bg0V9F9U)
+
 ## Necessary Packages
 
 The user can just run 
