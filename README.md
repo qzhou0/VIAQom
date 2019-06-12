@@ -1,5 +1,7 @@
 # Break Breaking out of High School  -- VIAQom
 
+## [Watch our video demo here](https://youtu.be/8t1RXKd3t6M)
+
 ## Roles
 - Vincent Chi (FrontEnd e.g. BootStrap)
 - Isaac Jon (BackEnd e.g. Database)
@@ -12,8 +14,6 @@ This is an implementation of breakbreaker, including cool features such as:
 - Coin feedback system that works with the game.
 - Creative upgrade features that improve gameplay experience.
 - Customization!
-
-## [Video](https://youtu.be/8t1RXKd3t6M)
 
 ## Necessary Packages
 
