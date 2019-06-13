@@ -6,4 +6,7 @@ import sys
 sys.path.insert(0,"/var/www/bbohs/")
 sys.path.insert(0,"/var/www/bbohs/bbohs/")
 
+import logging
+logging.basicConfig(stream=sys.stderr)
+
 from bbohs import app as application
